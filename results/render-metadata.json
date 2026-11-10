@@ -1,0 +1,32 @@
+{
+  "blender_version": "5.0.1",
+  "engine": "CYCLES",
+  "backend": "OPTIX",
+  "devices": [
+    {
+      "name": "NVIDIA RTX PRO 4000 Blackwell",
+      "type": "CUDA",
+      "enabled": false
+    },
+    {
+      "name": "AMD EPYC 7352 24-Core Processor",
+      "type": "CPU",
+      "enabled": false
+    },
+    {
+      "name": "NVIDIA RTX PRO 4000 Blackwell",
+      "type": "OPTIX",
+      "enabled": true
+    }
+  ],
+  "nvidia_smi": "NVIDIA RTX PRO 4000 Blackwell, 595.91.07, 24467 MiB",
+  "resolution": [
+    1600,
+    1000
+  ],
+  "max_samples": 128,
+  "adaptive_threshold": 0.01,
+  "render_seconds": 10.569,
+  "image": "first-light.png",
+  "scene": "first-light.blend"
+}

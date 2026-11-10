@@ -1,0 +1,11 @@
+00:01.740  cycles           | WARNING HIPEW initialization failed: Error opening HIP dynamic library
+/workspace/blender-lab/scripts/render_demo.py:70: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  scene.world.use_nodes = True
+/workspace/blender-lab/scripts/render_demo.py:16: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+Blender 5.0.1 (hash a3db93c5b259 built 2025-12-16 01:30:59)
+00:12.592  render           | Saved: '/workspace/blender-lab/results/first-light.png'
+Info: Saved as "first-light.blend"
+RENDER_COMPLETE {"blender_version": "5.0.1", "engine": "CYCLES", "backend": "OPTIX", "devices": [{"name": "NVIDIA RTX PRO 4000 Blackwell", "type": "CUDA", "enabled": false}, {"name": "AMD EPYC 7352 24-Core Processor", "type": "CPU", "enabled": false}, {"name": "NVIDIA RTX PRO 4000 Blackwell", "type": "OPTIX", "enabled": true}], "nvidia_smi": "NVIDIA RTX PRO 4000 Blackwell, 595.91.07, 24467 MiB", "resolution": [1600, 1000], "max_samples": 128, "adaptive_threshold": 0.01, "render_seconds": 10.569, "image": "first-light.png", "scene": "first-light.blend"}
+
+Blender quit

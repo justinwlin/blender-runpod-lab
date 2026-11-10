@@ -1,0 +1,19 @@
+{
+  "pod_id": "6mrcvhrbgvhqxq",
+  "gpu": "NVIDIA RTX PRO 4000 Blackwell",
+  "cloud": "SECURE",
+  "data_center": "EU-RO-1",
+  "hourly_compute_usd": 0.57,
+  "created_at": "2026-11-10T01:54:01.774Z",
+  "deletion_observed_at": "2026-11-10T01:58:05.025Z",
+  "deletion_status": 204,
+  "subsequent_get_status": 404,
+  "estimated_allocated_seconds": 243.251,
+  "estimated_compute_usd": 0.03851,
+  "cost_note": "Estimate from elapsed allocation time; excludes storage; not an invoice.",
+  "checksums": {
+    "first-light.png": "3e103e905568cd3e3aaa79e614f8b7341ed6ebbe99df886db848338462f15127",
+    "first-light.blend": "b078f7d368e9398f1a9857d00c39ec6162627c3a9f7a77c161d3a40d5d6ccdad",
+    "render-metadata.json": "2b30feba54a199455b2b6b3f2441849dcd851b0bf58d239b35ab1fe1b007b821"
+  }
+}

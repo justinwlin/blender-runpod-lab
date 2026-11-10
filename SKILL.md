@@ -13,9 +13,12 @@ Read [the film reference](docs/reference-film.md) only when the user asks about 
 
 Check the connected Runpod tools and local CLI separately. MCP access does not imply a valid local API key.
 Use MCP for infrastructure when it works. Direct SSH and SCP can use a task-specific SSH key without CLI API access.
+Inject the public key through PUBLIC_KEY at creation. Wait for direct SSH details after the container starts.
+The SSH proxy may reject a key that is only configured inside the pod. Account keys need not change for direct SSH.
 Keep private keys and connection state in `.local/`. Never commit credentials or raw account responses.
 
 Read the live GPU catalog and state the selected hourly rate before pod creation.
+Check GPU count, cloud tier, CUDA version, and data center together.
 Respect the user's GPU choice and budget. A LOW catalog result does not reserve a GPU.
 Treat a capacity error as a failed allocation. Do not repeat the same request without new capacity evidence.
 Ask before replacing an explicitly required GPU family.
@@ -50,5 +53,6 @@ Verify frame completeness before video assembly. Benchmark one representative fr
 ## Report
 
 Return the visible result, source scene, GPU model, Blender version, backend, resolution, and measured render time.
+Use nvidia-smi for GPU memory. Do not assume the control API's gpu.memory field reports VRAM.
 Separate setup duration, render duration, billed duration, and estimated cost.
 State whether cleanup succeeded. If no render ran, report that fact and the actual blocker.
