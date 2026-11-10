@@ -1,0 +1,10 @@
+{
+  "video": "results/pikachu/pikachu-sleep.mp4",
+  "frames": 120,
+  "seconds": 5,
+  "resolution": [
+    1200,
+    1200
+  ],
+  "backend": "OPTIX"
+}

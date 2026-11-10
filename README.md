@@ -5,6 +5,13 @@ A private experiment for a repeatable Blender GPU render skill.
 The first scene uses a porcelain plinth, an orange torus, a teal sphere, and a gold cube.
 It needs no external textures or paid assets.
 
+## Sleeping Pikachu in 3D
+
+[Watch the animation](results/pikachu/pikachu-sleep.mp4),
+[download the animated GLB](results/pikachu/pikachu-sleep.glb), or
+[open the Blender scene](results/pikachu/pikachu-sleep.blend).
+See the [scene and run notes](docs/pikachu-sleep.md).
+
 ## Runpod ball and wall test
 
 [Watch the ball bounce against a wall](results/ball/ball-wall.mp4).

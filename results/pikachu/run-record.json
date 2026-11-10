@@ -1,0 +1,14 @@
+{
+  "pod_id": "hq8gpe2xuoh7ht",
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "region": "EU-RO-1",
+  "hourly_compute_usd": 2.49,
+  "created_at": "2026-11-10T03:22:10.179Z",
+  "deletion_verified_at": "2026-11-10T03:33:37Z",
+  "deletion_status": 404,
+  "estimated_compute_usd": 0.4751,
+  "cost_note": "Elapsed allocation estimate, not an invoice; storage is extra.",
+  "render_seconds": 394.342,
+  "all_render_and_encode_on_runpod": true,
+  "download_checksums_verified": true
+}

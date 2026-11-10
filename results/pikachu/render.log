@@ -1,0 +1,294 @@
+00:00.372  cycles           | WARNING HIPEW initialization failed: Error opening HIP dynamic library
+/workspace/blender-lab/scripts/pikachu_sleep.py:10: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  s.world=bpy.data.worlds.new('Cream studio');s.world.use_nodes=True;s.world.node_tree.nodes['Background'].inputs[0].default_value=(.82,.88,1,1);s.world.node_tree.nodes['Background'].inputs[1].default_value=.4
+/workspace/blender-lab/scripts/pikachu_sleep.py:13: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m=bpy.data.materials.new(n);m.diffuse_color=(*c,1);m.use_nodes=True;b=m.node_tree.nodes['Principled BSDF'];b.inputs['Base Color'].default_value=(*c,1);b.inputs['Roughness'].default_value=rough;b.inputs['Metallic'].default_value=metal;return m
+Info: Saved as "pikachu-sleep.blend"
+INFO Draco mesh compression is available, use library at /opt/blender/blender-5.0.1-linux-x64/5.0/scripts/addons_core/io_scene_gltf2/libextern_draco.so
+03:26:16 | INFO: Starting glTF 2.0 export
+03:26:16 | INFO: Extracting primitive: Cylinder
+03:26:16 | INFO: Primitives created: 1
+03:26:16 | INFO: Extracting primitive: Cylinder.002
+03:26:16 | INFO: Primitives created: 1
+03:26:16 | INFO: Extracting primitive: Cylinder.001
+03:26:16 | INFO: Primitives created: 1
+03:26:16 | INFO: Extracting primitive: Sphere.009
+03:26:16 | INFO: Primitives created: 1
+03:26:16 | INFO: Extracting primitive: Sphere.010
+03:26:16 | INFO: Primitives created: 1
+03:26:16 | INFO: Extracting primitive: Content smile
+03:26:16 | INFO: Primitives created: 1
+03:26:16 | INFO: Extracting primitive: Sphere.006
+03:26:16 | INFO: Primitives created: 1
+03:26:16 | INFO: Extracting primitive: Sphere.007
+03:26:16 | INFO: Primitives created: 1
+03:26:16 | INFO: Extracting primitive: Sphere.003
+03:26:16 | INFO: Primitives created: 1
+03:26:16 | INFO: Extracting primitive: Left closed eyelid
+03:26:16 | INFO: Primitives created: 1
+03:26:16 | INFO: Extracting primitive: Left long black-tipped ear
+03:26:16 | INFO: Primitives created: 2
+03:26:16 | INFO: Extracting primitive: Tail mesh
+03:26:16 | INFO: Primitives created: 1
+03:26:16 | INFO: Extracting primitive: Sphere.008
+03:26:16 | INFO: Primitives created: 1
+03:26:16 | INFO: Extracting primitive: Sphere.004
+03:26:16 | INFO: Primitives created: 1
+03:26:16 | INFO: Extracting primitive: Right closed eyelid
+03:26:16 | INFO: Primitives created: 1
+03:26:16 | INFO: Extracting primitive: Right long black-tipped ear
+03:26:16 | INFO: Primitives created: 2
+03:26:16 | INFO: Extracting primitive: Sphere.002
+03:26:16 | INFO: Primitives created: 1
+03:26:16 | INFO: Extracting primitive: Sphere.001
+03:26:16 | INFO: Primitives created: 1
+03:26:16 | INFO: Extracting primitive: Sphere.005
+03:26:16 | INFO: Primitives created: 1
+03:26:16 | INFO: Extracting primitive: Sphere
+03:26:16 | INFO: Primitives created: 3
+03:26:16 | INFO: Finished glTF 2.0 export in 0.8305652141571045 s
+00:07.362  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0001.png'
+
+FRAME_COMPLETE {"frame": 1, "seconds": 3.712}
+00:10.354  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0002.png'
+FRAME_COMPLETE {"frame": 2, "seconds": 2.99}
+00:13.653  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0003.png'
+FRAME_COMPLETE {"frame": 3, "seconds": 3.298}
+00:17.073  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0004.png'
+FRAME_COMPLETE {"frame": 4, "seconds": 3.419}
+00:20.514  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0005.png'
+FRAME_COMPLETE {"frame": 5, "seconds": 3.442}
+00:23.575  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0006.png'
+FRAME_COMPLETE {"frame": 6, "seconds": 3.06}
+00:26.717  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0007.png'
+FRAME_COMPLETE {"frame": 7, "seconds": 3.142}
+00:29.872  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0008.png'
+FRAME_COMPLETE {"frame": 8, "seconds": 3.155}
+00:33.016  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0009.png'
+FRAME_COMPLETE {"frame": 9, "seconds": 3.143}
+00:36.774  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0010.png'
+FRAME_COMPLETE {"frame": 10, "seconds": 3.758}
+00:40.073  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0011.png'
+FRAME_COMPLETE {"frame": 11, "seconds": 3.298}
+00:42.939  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0012.png'
+FRAME_COMPLETE {"frame": 12, "seconds": 2.866}
+00:46.619  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0013.png'
+FRAME_COMPLETE {"frame": 13, "seconds": 3.68}
+00:49.826  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0014.png'
+FRAME_COMPLETE {"frame": 14, "seconds": 3.206}
+00:52.817  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0015.png'
+FRAME_COMPLETE {"frame": 15, "seconds": 2.991}
+00:56.105  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0016.png'
+FRAME_COMPLETE {"frame": 16, "seconds": 3.287}
+00:59.275  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0017.png'
+FRAME_COMPLETE {"frame": 17, "seconds": 3.169}
+01:02.214  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0018.png'
+FRAME_COMPLETE {"frame": 18, "seconds": 2.939}
+01:05.281  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0019.png'
+FRAME_COMPLETE {"frame": 19, "seconds": 3.067}
+01:08.373  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0020.png'
+FRAME_COMPLETE {"frame": 20, "seconds": 3.092}
+01:11.367  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0021.png'
+FRAME_COMPLETE {"frame": 21, "seconds": 2.993}
+01:14.572  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0022.png'
+FRAME_COMPLETE {"frame": 22, "seconds": 3.205}
+01:17.942  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0023.png'
+FRAME_COMPLETE {"frame": 23, "seconds": 3.369}
+01:21.176  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0024.png'
+FRAME_COMPLETE {"frame": 24, "seconds": 3.234}
+01:24.208  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0025.png'
+FRAME_COMPLETE {"frame": 25, "seconds": 3.032}
+01:27.275  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0026.png'
+FRAME_COMPLETE {"frame": 26, "seconds": 3.066}
+01:30.486  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0027.png'
+FRAME_COMPLETE {"frame": 27, "seconds": 3.211}
+01:33.706  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0028.png'
+FRAME_COMPLETE {"frame": 28, "seconds": 3.219}
+01:37.674  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0029.png'
+FRAME_COMPLETE {"frame": 29, "seconds": 3.968}
+01:40.990  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0030.png'
+FRAME_COMPLETE {"frame": 30, "seconds": 3.315}
+01:44.590  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0031.png'
+FRAME_COMPLETE {"frame": 31, "seconds": 3.6}
+01:47.814  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0032.png'
+FRAME_COMPLETE {"frame": 32, "seconds": 3.224}
+01:51.125  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0033.png'
+FRAME_COMPLETE {"frame": 33, "seconds": 3.31}
+01:54.233  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0034.png'
+FRAME_COMPLETE {"frame": 34, "seconds": 3.108}
+01:57.591  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0035.png'
+FRAME_COMPLETE {"frame": 35, "seconds": 3.358}
+02:00.806  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0036.png'
+FRAME_COMPLETE {"frame": 36, "seconds": 3.214}
+02:03.928  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0037.png'
+FRAME_COMPLETE {"frame": 37, "seconds": 3.122}
+02:07.972  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0038.png'
+FRAME_COMPLETE {"frame": 38, "seconds": 4.043}
+02:11.127  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0039.png'
+FRAME_COMPLETE {"frame": 39, "seconds": 3.155}
+02:14.194  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0040.png'
+FRAME_COMPLETE {"frame": 40, "seconds": 3.067}
+02:18.315  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0041.png'
+FRAME_COMPLETE {"frame": 41, "seconds": 4.12}
+02:21.517  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0042.png'
+FRAME_COMPLETE {"frame": 42, "seconds": 3.201}
+02:24.588  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0043.png'
+FRAME_COMPLETE {"frame": 43, "seconds": 3.071}
+02:27.756  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0044.png'
+FRAME_COMPLETE {"frame": 44, "seconds": 3.168}
+02:30.877  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0045.png'
+FRAME_COMPLETE {"frame": 45, "seconds": 3.12}
+02:34.165  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0046.png'
+FRAME_COMPLETE {"frame": 46, "seconds": 3.288}
+02:37.375  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0047.png'
+FRAME_COMPLETE {"frame": 47, "seconds": 3.209}
+02:40.875  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0048.png'
+FRAME_COMPLETE {"frame": 48, "seconds": 3.5}
+02:44.025  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0049.png'
+FRAME_COMPLETE {"frame": 49, "seconds": 3.149}
+02:47.312  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0050.png'
+FRAME_COMPLETE {"frame": 50, "seconds": 3.287}
+02:50.540  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0051.png'
+FRAME_COMPLETE {"frame": 51, "seconds": 3.227}
+02:53.615  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0052.png'
+FRAME_COMPLETE {"frame": 52, "seconds": 3.075}
+02:56.712  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0053.png'
+FRAME_COMPLETE {"frame": 53, "seconds": 3.097}
+02:59.894  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0054.png'
+FRAME_COMPLETE {"frame": 54, "seconds": 3.182}
+03:02.973  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0055.png'
+FRAME_COMPLETE {"frame": 55, "seconds": 3.078}
+03:06.074  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0056.png'
+FRAME_COMPLETE {"frame": 56, "seconds": 3.101}
+03:09.617  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0057.png'
+FRAME_COMPLETE {"frame": 57, "seconds": 3.543}
+03:12.720  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0058.png'
+FRAME_COMPLETE {"frame": 58, "seconds": 3.102}
+03:15.855  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0059.png'
+FRAME_COMPLETE {"frame": 59, "seconds": 3.135}
+03:19.071  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0060.png'
+FRAME_COMPLETE {"frame": 60, "seconds": 3.215}
+03:22.606  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0061.png'
+FRAME_COMPLETE {"frame": 61, "seconds": 3.535}
+03:25.880  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0062.png'
+FRAME_COMPLETE {"frame": 62, "seconds": 3.273}
+03:29.263  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0063.png'
+FRAME_COMPLETE {"frame": 63, "seconds": 3.383}
+03:32.372  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0064.png'
+FRAME_COMPLETE {"frame": 64, "seconds": 3.108}
+03:35.513  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0065.png'
+FRAME_COMPLETE {"frame": 65, "seconds": 3.141}
+03:38.851  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0066.png'
+FRAME_COMPLETE {"frame": 66, "seconds": 3.338}
+03:41.975  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0067.png'
+FRAME_COMPLETE {"frame": 67, "seconds": 3.123}
+03:45.209  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0068.png'
+FRAME_COMPLETE {"frame": 68, "seconds": 3.234}
+03:48.491  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0069.png'
+FRAME_COMPLETE {"frame": 69, "seconds": 3.282}
+03:51.772  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0070.png'
+FRAME_COMPLETE {"frame": 70, "seconds": 3.281}
+03:55.491  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0071.png'
+FRAME_COMPLETE {"frame": 71, "seconds": 3.718}
+03:58.667  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0072.png'
+FRAME_COMPLETE {"frame": 72, "seconds": 3.175}
+04:02.094  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0073.png'
+FRAME_COMPLETE {"frame": 73, "seconds": 3.426}
+04:05.272  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0074.png'
+FRAME_COMPLETE {"frame": 74, "seconds": 3.178}
+04:08.376  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0075.png'
+FRAME_COMPLETE {"frame": 75, "seconds": 3.103}
+04:12.673  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0076.png'
+FRAME_COMPLETE {"frame": 76, "seconds": 4.297}
+04:15.676  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0077.png'
+FRAME_COMPLETE {"frame": 77, "seconds": 3.002}
+04:18.771  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0078.png'
+FRAME_COMPLETE {"frame": 78, "seconds": 3.094}
+04:21.779  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0079.png'
+FRAME_COMPLETE {"frame": 79, "seconds": 3.007}
+04:24.772  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0080.png'
+FRAME_COMPLETE {"frame": 80, "seconds": 2.993}
+04:27.610  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0081.png'
+FRAME_COMPLETE {"frame": 81, "seconds": 2.837}
+04:30.673  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0082.png'
+FRAME_COMPLETE {"frame": 82, "seconds": 3.063}
+04:33.657  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0083.png'
+FRAME_COMPLETE {"frame": 83, "seconds": 2.983}
+04:37.073  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0084.png'
+FRAME_COMPLETE {"frame": 84, "seconds": 3.415}
+04:40.226  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0085.png'
+FRAME_COMPLETE {"frame": 85, "seconds": 3.153}
+04:43.626  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0086.png'
+FRAME_COMPLETE {"frame": 86, "seconds": 3.4}
+04:46.939  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0087.png'
+FRAME_COMPLETE {"frame": 87, "seconds": 3.313}
+04:50.008  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0088.png'
+FRAME_COMPLETE {"frame": 88, "seconds": 3.068}
+04:53.188  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0089.png'
+FRAME_COMPLETE {"frame": 89, "seconds": 3.18}
+04:57.122  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0090.png'
+FRAME_COMPLETE {"frame": 90, "seconds": 3.934}
+05:00.407  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0091.png'
+FRAME_COMPLETE {"frame": 91, "seconds": 3.284}
+05:03.857  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0092.png'
+FRAME_COMPLETE {"frame": 92, "seconds": 3.45}
+05:07.088  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0093.png'
+FRAME_COMPLETE {"frame": 93, "seconds": 3.231}
+05:10.313  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0094.png'
+FRAME_COMPLETE {"frame": 94, "seconds": 3.224}
+05:13.418  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0095.png'
+FRAME_COMPLETE {"frame": 95, "seconds": 3.105}
+05:17.357  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0096.png'
+FRAME_COMPLETE {"frame": 96, "seconds": 3.938}
+05:21.115  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0097.png'
+FRAME_COMPLETE {"frame": 97, "seconds": 3.757}
+05:25.193  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0098.png'
+FRAME_COMPLETE {"frame": 98, "seconds": 4.078}
+05:29.012  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0099.png'
+FRAME_COMPLETE {"frame": 99, "seconds": 3.819}
+05:32.181  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0100.png'
+FRAME_COMPLETE {"frame": 100, "seconds": 3.168}
+05:35.390  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0101.png'
+FRAME_COMPLETE {"frame": 101, "seconds": 3.209}
+05:38.670  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0102.png'
+FRAME_COMPLETE {"frame": 102, "seconds": 3.28}
+05:41.809  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0103.png'
+FRAME_COMPLETE {"frame": 103, "seconds": 3.139}
+05:45.755  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0104.png'
+FRAME_COMPLETE {"frame": 104, "seconds": 3.945}
+05:49.078  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0105.png'
+FRAME_COMPLETE {"frame": 105, "seconds": 3.323}
+05:52.345  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0106.png'
+FRAME_COMPLETE {"frame": 106, "seconds": 3.267}
+05:55.799  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0107.png'
+FRAME_COMPLETE {"frame": 107, "seconds": 3.453}
+05:59.040  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0108.png'
+FRAME_COMPLETE {"frame": 108, "seconds": 3.24}
+06:02.288  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0109.png'
+FRAME_COMPLETE {"frame": 109, "seconds": 3.248}
+06:05.512  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0110.png'
+FRAME_COMPLETE {"frame": 110, "seconds": 3.223}
+06:08.524  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0111.png'
+FRAME_COMPLETE {"frame": 111, "seconds": 3.011}
+06:11.884  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0112.png'
+FRAME_COMPLETE {"frame": 112, "seconds": 3.36}
+06:15.047  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0113.png'
+FRAME_COMPLETE {"frame": 113, "seconds": 3.163}
+06:18.185  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0114.png'
+FRAME_COMPLETE {"frame": 114, "seconds": 3.137}
+06:21.806  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0115.png'
+FRAME_COMPLETE {"frame": 115, "seconds": 3.62}
+06:24.916  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0116.png'
+FRAME_COMPLETE {"frame": 116, "seconds": 3.11}
+06:28.073  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0117.png'
+FRAME_COMPLETE {"frame": 117, "seconds": 3.156}
+06:31.660  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0118.png'
+FRAME_COMPLETE {"frame": 118, "seconds": 3.586}
+06:34.674  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0119.png'
+FRAME_COMPLETE {"frame": 119, "seconds": 3.014}
+06:37.990  render           | Saved: '/workspace/blender-lab/results/pikachu/frames/frame_0120.png'
+FRAME_COMPLETE {"frame": 120, "seconds": 3.315}
+COMPLETE
+Blender 5.0.1 (hash a3db93c5b259 built 2025-12-16 01:30:59)
+
+Blender quit
