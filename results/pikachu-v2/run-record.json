@@ -1,0 +1,20 @@
+{
+  "pod_id": "an1hrtsf94ybhg",
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "cloud": "SECURE",
+  "data_center": "EUR-IS-2",
+  "rate_usd_per_hour": 2.49,
+  "image": "runpod/base:1.0.2-ubuntu2404",
+  "created_utc": "2026-11-10T03:41:51Z",
+  "deleted_utc_approx": "2026-11-10T04:05Z",
+  "allocated_minutes_approx": 24,
+  "approx_gpu_cost_usd": 1.0,
+  "allocation_attempts": 1,
+  "previews_rendered_on_pod": 6,
+  "final_render_seconds": 508.226,
+  "backend": "OPTIX",
+  "tarball_sha256": "10c34423ae1ab4dc3be338b52184c1b303d155046507e51c9b45dcc17619dea0",
+  "local_tarball_sha256_match": true,
+  "per_file_sha256_check": "all OK",
+  "delete_followup_get": 404
+}
