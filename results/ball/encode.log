@@ -1,0 +1,10 @@
+{
+  "video": "results/ball/ball-wall.mp4",
+  "frames": 120,
+  "seconds": 5,
+  "resolution": [
+    1280,
+    720
+  ],
+  "backend": "OPTIX"
+}

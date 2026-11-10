@@ -21,7 +21,10 @@ Read the live GPU catalog and state the selected hourly rate before pod creation
 Check GPU count, cloud tier, CUDA version, and data center together.
 Respect the user's GPU choice and budget. A LOW catalog result does not reserve a GPU.
 Treat a capacity error as a failed allocation. Do not repeat the same request without new capacity evidence.
-Ask before replacing an explicitly required GPU family.
+Ask before replacing an explicitly required GPU family unless the user already authorized alternatives.
+If the user permits a higher price, check larger RTX GPUs and all compatible regions before declaring capacity blocked.
+A failed allocation for one GPU does not establish that Runpod has no capacity.
+If the user requires Runpod, keep every render and video encode on Runpod. Do not use a local fallback.
 
 Record the ID of every pod created for the task. Delete only those pods, after verified output retrieval.
 Use a platform termination schedule when available. Do not claim that a shell timeout limits pod billing.

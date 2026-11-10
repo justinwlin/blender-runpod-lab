@@ -5,6 +5,12 @@ A private experiment for a repeatable Blender GPU render skill.
 The first scene uses a porcelain plinth, an orange torus, a teal sphere, and a gold cube.
 It needs no external textures or paid assets.
 
+## Runpod ball and wall test
+
+[Watch the ball bounce against a wall](results/ball/ball-wall.mp4).
+This five-second test uses Runpod for all renders and video output.
+See the [run record and setup findings](docs/ball-wall.md).
+
 ## Five-second animation
 
 [Pip takes a dip — watch the video](results/penguin/pip-takes-a-dip.mp4)
