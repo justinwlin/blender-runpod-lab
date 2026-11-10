@@ -1,0 +1,20 @@
+{
+  "pod_id": "sffip466p50hwc",
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "cloud": "SECURE",
+  "data_center": "US-NC-2",
+  "rate_usd_per_hour": 2.49,
+  "image": "runpod/base:1.0.2-ubuntu2404",
+  "extra_dependency": "scikit-image 0.26.0 in Blender's bundled Python",
+  "created_utc": "2026-11-10T04:08:17Z",
+  "deleted_utc_approx": "2026-11-10T04:22Z",
+  "allocated_minutes_approx": 14.5,
+  "approx_gpu_cost_usd": 0.6,
+  "allocation_attempts": 1,
+  "final_render_seconds": 503.962,
+  "backend": "OPTIX",
+  "tarball_sha256": "d60fd3fefd78e5df2655492cd4270758a57aaa5279728e9b4f0d64fa8d5a52e8",
+  "local_tarball_sha256_match": true,
+  "per_file_sha256_check": "all OK",
+  "delete_followup_get": 404
+}
