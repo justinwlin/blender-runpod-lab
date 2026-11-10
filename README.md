@@ -5,6 +5,17 @@ A private experiment for a repeatable Blender GPU render skill.
 The first scene uses a porcelain plinth, an orange torus, a teal sphere, and a gold cube.
 It needs no external textures or paid assets.
 
+## Five-second animation
+
+[Pip takes a dip — watch the video](results/penguin/pip-takes-a-dip.mp4)
+
+![Pip the penguin](results/penguin/poster.png)
+
+The penguin walks, loses balance, splashes into the sea, and returns with a wink.
+This animation used the local Apple M4 Pro GPU through Metal after Runpod capacity requests failed.
+See the [animation record](docs/penguin-animation.md), [editable scene](results/penguin/penguin.blend),
+and [render metadata](results/penguin/render-metadata.json).
+
 ## First verified result
 
 ![First Light: a GPU-rendered studio scene](results/first-light.png)

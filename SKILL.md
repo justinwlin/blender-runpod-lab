@@ -42,6 +42,15 @@ The demo script refuses a silent CPU fallback. A started pod or a successful pac
 Use the same Blender release and add-on versions as an existing user scene.
 Copy linked assets and baked simulation caches as well as the `.blend` file.
 
+## Short animation
+
+Use `scripts/penguin_animation.py` as a self-contained example.
+Inspect selected local previews before a full render.
+The default backend is OptiX. `--metal` explicitly selects the Apple GPU; `--cpu` explicitly selects the CPU.
+Report a local fallback clearly. Do not label local frames as a cloud GPU result.
+Use `scripts/encode_animation.py SOURCE DESTINATION.mp4` to check and encode the complete sequence.
+Read [the animation record](docs/penguin-animation.md) for the verified workflow.
+
 ## Multiple GPUs
 
 One process can use multiple supported GPUs for one frame. Separate workers can render different frames from one scene.
