@@ -1,0 +1,18 @@
+{
+  "look": "Variant A (anime plush), leaf ears, soft particle fur",
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition, SECURE, $2.49/hour each",
+  "pods": [
+    {"id": "ngmi1emlq44h2i", "dc": "US-PA-1", "role": "previews, GLB/blend export, frames 1-17, merge and encode", "minutes": 47.4},
+    {"id": "flue19ksvl7v78", "dc": "US-NC-2", "role": "frames 55-72, 18-30", "minutes": 13.6},
+    {"id": "1ioj2pa9d2og7y", "dc": "US-NC-2", "role": "frames 73-90, 31-42", "minutes": 13.5},
+    {"id": "i3vdotp2evya6n", "dc": "EUR-IS-2", "role": "frames 91-108, 43-54", "minutes": 13.5},
+    {"id": "5hazzf5p4fgbpd", "dc": "US-NC-2", "role": "never reached SSH; deleted unused", "minutes": 4.0}
+  ],
+  "approx_total_cost_usd": 3.82,
+  "notes": "Main pod host was CPU-starved (load ~52, 32 s/frame); workers ran ~10 s/frame, so the main pod was stopped at frame 17 and workers took over.",
+  "tarball_sha256": "3a85cdb6a545b3c266634af45fee2c42b8a66db4d87c88ca4f872751d0677051",
+  "local_tarball_sha256_match": true,
+  "per_file_sha256_check": "12/12 OK",
+  "all_pods_deleted": true,
+  "list_pods_after": "only unrelated pod 8h0j26w75c7nnn remains"
+}

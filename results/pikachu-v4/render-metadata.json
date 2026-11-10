@@ -1,0 +1,422 @@
+{
+  "blender": "5.0.1",
+  "backend": "OPTIX",
+  "resolution": [
+    1440,
+    1080
+  ],
+  "samples": 128,
+  "fps": 24,
+  "frames": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108
+  ],
+  "loop_period_frames": 108,
+  "variant": "A",
+  "ears": "leaf",
+  "fur": true,
+  "split": {
+    "main pod ngmi1emlq44h2i": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "w2": [
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72
+    ],
+    "w2b": [
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30
+    ],
+    "w3": [
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90
+    ],
+    "w3b": [
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42
+    ],
+    "w4": [
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108
+    ],
+    "w4b": [
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54
+    ]
+  },
+  "devices": {
+    "w2": [
+      {
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "type": "CUDA",
+        "enabled": false
+      },
+      {
+        "name": "AMD EPYC 9355 32-Core Processor",
+        "type": "CPU",
+        "enabled": false
+      },
+      {
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "type": "OPTIX",
+        "enabled": true
+      }
+    ],
+    "w2b": [
+      {
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "type": "CUDA",
+        "enabled": false
+      },
+      {
+        "name": "AMD EPYC 9355 32-Core Processor",
+        "type": "CPU",
+        "enabled": false
+      },
+      {
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "type": "OPTIX",
+        "enabled": true
+      }
+    ],
+    "w3": [
+      {
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "type": "CUDA",
+        "enabled": false
+      },
+      {
+        "name": "AMD EPYC 9355 32-Core Processor",
+        "type": "CPU",
+        "enabled": false
+      },
+      {
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "type": "OPTIX",
+        "enabled": true
+      }
+    ],
+    "w3b": [
+      {
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "type": "CUDA",
+        "enabled": false
+      },
+      {
+        "name": "AMD EPYC 9355 32-Core Processor",
+        "type": "CPU",
+        "enabled": false
+      },
+      {
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "type": "OPTIX",
+        "enabled": true
+      }
+    ],
+    "w4": [
+      {
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "type": "CUDA",
+        "enabled": false
+      },
+      {
+        "name": "AMD EPYC 9575F 64-Core Processor",
+        "type": "CPU",
+        "enabled": false
+      },
+      {
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "type": "OPTIX",
+        "enabled": true
+      }
+    ],
+    "w4b": [
+      {
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "type": "CUDA",
+        "enabled": false
+      },
+      {
+        "name": "AMD EPYC 9575F 64-Core Processor",
+        "type": "CPU",
+        "enabled": false
+      },
+      {
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "type": "OPTIX",
+        "enabled": true
+      }
+    ]
+  },
+  "frame_timings_main": [
+    {
+      "frame": 1,
+      "seconds": 31.216
+    },
+    {
+      "frame": 2,
+      "seconds": 17.892
+    },
+    {
+      "frame": 3,
+      "seconds": 19.781
+    },
+    {
+      "frame": 4,
+      "seconds": 26.704
+    },
+    {
+      "frame": 5,
+      "seconds": 28.709
+    },
+    {
+      "frame": 6,
+      "seconds": 29.494
+    },
+    {
+      "frame": 7,
+      "seconds": 30.603
+    },
+    {
+      "frame": 8,
+      "seconds": 30.605
+    },
+    {
+      "frame": 9,
+      "seconds": 30.693
+    },
+    {
+      "frame": 10,
+      "seconds": 30.097
+    },
+    {
+      "frame": 11,
+      "seconds": 30.276
+    },
+    {
+      "frame": 12,
+      "seconds": 30.097
+    },
+    {
+      "frame": 13,
+      "seconds": 29.395
+    },
+    {
+      "frame": 14,
+      "seconds": 30.905
+    },
+    {
+      "frame": 15,
+      "seconds": 30.098
+    },
+    {
+      "frame": 16,
+      "seconds": 30.697
+    },
+    {
+      "frame": 17,
+      "seconds": 28.796
+    }
+  ]
+}

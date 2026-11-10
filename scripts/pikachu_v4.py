@@ -29,6 +29,7 @@ ap.add_argument('--no-render', action='store_true')
 ap.add_argument('--variant', default='A', choices=['A', 'B', 'C', 'D'])
 ap.add_argument('--no-fur', action='store_true')
 ap.add_argument('--closeup', action='store_true')
+ap.add_argument('--ears', default='leaf', choices=['leaf', 'upright', 'droop'])
 args = ap.parse_args(sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else [])
 out = args.output.resolve()
 (out / 'frames').mkdir(parents=True, exist_ok=True)
@@ -36,7 +37,7 @@ out = args.output.resolve()
 N = 108            # loop length: 4.5 s at 24 fps, same period as the reference GIF
 FPS = 24
 R = 0.86           # ball radius
-YAW = math.radians(46)   # turn the face toward the camera
+YAW = math.radians(54)   # turn the face toward the camera
 
 # ---------------------------------------------------------------- scene setup
 bpy.ops.wm.read_factory_settings(use_empty=True)
@@ -58,7 +59,7 @@ scene.frame_end = N
 scene.render.image_settings.file_format = 'PNG'
 scene.render.image_settings.color_mode = 'RGB'
 scene.view_settings.view_transform = 'Khronos PBR Neutral'
-scene.view_settings.exposure = -0.55
+scene.view_settings.exposure = -0.42
 
 devices = []
 if not args.no_render:
@@ -266,7 +267,7 @@ from skimage.measure import marching_cubes
 SINK = -0.22   # Pikachu settles slightly into the ball contact
 VARIANTS = {
     # head scale, body scale (length, width, height), ear scale, fur length, fur count, clump, frizz
-    'A': dict(name='Anime plush', head=1.00, body=(1.00, 1.00, 1.00), ear=1.00, fur=0.022, n=60000, clump=0.25, frizz=0.10),
+    'A': dict(name='Anime plush', head=1.00, body=(1.00, 1.00, 1.00), ear=1.10, fur=0.019, n=70000, clump=0.20, frizz=0.06),
     'B': dict(name='Chubby plush toy', head=1.07, body=(0.95, 1.10, 1.08), ear=0.85, fur=0.040, n=50000, clump=0.40, frizz=0.25),
     'C': dict(name='Anime figure, peach fuzz', head=1.00, body=(1.00, 0.97, 0.97), ear=1.05, fur=0.011, n=90000, clump=0.10, frizz=0.05),
     'D': dict(name='Chibi plush', head=1.16, body=(0.88, 0.95, 0.95), ear=0.90, fur=0.028, n=55000, clump=0.30, frizz=0.15),
@@ -278,12 +279,19 @@ HEAD_C = Vector((-0.42, 0.0, 0.68 + (HS - 1) * 0.40))
 EAR_LEN = 0.95 * V['ear']
 EAR_FLAT = 0.40
 EAR_DIR = {-1: Vector((0.82, -0.38, 0.44)).normalized(), 1: Vector((0.86, 0.30, 0.42)).normalized()}
+EAR_STYLES = {
+    'leaf': {-1: (0.80, -0.30, 0.52), 1: (0.84, 0.24, 0.48)},
+    'upright': {-1: (0.52, -0.30, 0.80), 1: (0.60, 0.22, 0.77)},
+    'droop': {-1: (0.84, -0.46, 0.24), 1: (0.88, 0.40, 0.22)},
+}
+EAR_DIR = {k: Vector(v).normalized() for k, v in EAR_STYLES[args.ears].items()}
+EAR_CURL = -0.10 if args.ears == 'droop' else 0.05
 EAR_BASE = {s: HEAD_C + Vector((0.10, s * 0.27, 0.36)) * HS for s in (-1, 1)}
-LIN_YELLOW = (1.0, 0.62, 0.01)
+LIN_YELLOW = (1.0, 0.80, 0.07)   # skin matches the fur so gaps do not read orange
 LIN_INK = (0.018, 0.024, 0.045)
 LIN_BROWN = (0.16, 0.05, 0.012)
 LIN_CHEEK = (0.95, 0.10, 0.06)
-FUR_YELLOW = (1.0, 0.86, 0.16)
+FUR_YELLOW = (1.0, 0.80, 0.07)
 FUR_CHEEK = (1.0, 0.22, 0.14)
 
 
@@ -320,16 +328,17 @@ def ear_frame(side):
 
 
 def sd_ear(P, side):
+    """One smooth leaf-shaped ear: slim base, widest near 40%, soft rounded tip."""
     d, w, n = ear_frame(side)
     q = P - _v(EAR_BASE[side])
     u, s, t = q @ _v(d), q @ _v(w), q @ _v(n)
-    # Slight backward curl: the tip bends toward the thickness axis.
-    t = t + 0.10 * np.clip(u / EAR_LEN, 0, 1) ** 2
-    Q = np.stack([u, s, t / EAR_FLAT], axis=-1)
     L = EAR_LEN
-    a = sd_cone(Q, (0, 0, 0), (0.36 * L, 0, 0), 0.105, 0.16)
-    b = sd_cone(Q, (0.36 * L, 0, 0), (L, 0, 0), 0.16, 0.008)
-    return smin(a, b, 0.05) * EAR_FLAT
+    x = np.clip(u / L, 0, 1)
+    t = t + EAR_CURL * x * x
+    qu = x * L
+    r = 0.165 * np.clip(np.sin(np.pi * (0.10 + 0.90 * x)), 0.0, 1.0) ** 0.8 * (1 - 0.15 * x) + 0.028 * x
+    dist = np.sqrt((u - qu) ** 2 + s * s + (t / EAR_FLAT) ** 2) - r
+    return dist * EAR_FLAT
 
 
 def pikachu_sdf(P):
@@ -366,11 +375,13 @@ def sdf_surface_point(direction, center=HEAD_C):
 
 def build_body():
     h = 0.006
-    lo = np.array((-1.0, -0.85, -0.32 + SINK), dtype=np.float32)
-    hi = np.array((1.25, 0.85, 1.55 + SINK), dtype=np.float32)
+    lo = np.array((-1.0, -0.95, -0.32 + SINK), dtype=np.float32)
+    hi = np.array((1.40, 0.95, 1.90 + SINK), dtype=np.float32)
     axes = [np.arange(lo[i], hi[i], h, dtype=np.float32) for i in range(3)]
     G = np.stack(np.meshgrid(*axes, indexing='ij'), axis=-1)
     field = pikachu_sdf(G)
+    bad = int((~np.isfinite(field)).sum())
+    assert bad == 0, ('non-finite SDF values', bad)
     del G
     verts, faces, _, _ = marching_cubes(field, level=0.0, spacing=(h, h, h))
     verts = verts.astype(np.float32) + lo
@@ -430,7 +441,7 @@ def paint(V):
         q = P - _v(EAR_BASE[s])
         u, sw = q @ _v(d), q @ _v(w)
         near = (np.abs(q @ _v(n)) < 0.15) & (np.abs(sw) < 0.25)
-        cut = 0.64 * EAR_LEN - 0.12 * (sw / 0.16) ** 2 * 0.25
+        cut = 0.70 * EAR_LEN - 0.03 * (sw / 0.16) ** 2
         mix(_sstep(cut - 0.006, cut + 0.006, u) * near, LIN_INK)
     # Two brown stripes across the lower back.
     for xc in (0.36, 0.53):
@@ -458,6 +469,17 @@ def surface_point(body, direction, center=HEAD_C):
 
 
 # ---------------------------------------------------------------- tail
+def chaikin(pts, iters=2, f=0.18):
+    for _ in range(iters):
+        out = []
+        for i in range(len(pts)):
+            a, b = pts[i], pts[(i + 1) % len(pts)]
+            out.append((a[0] + f * (b[0] - a[0]), a[1] + f * (b[1] - a[1])))
+            out.append((b[0] - f * (b[0] - a[0]), b[1] - f * (b[1] - a[1])))
+        pts = out
+    return pts
+
+
 TAIL_OUTLINE = [(0.00, 0.00), (0.11, -0.05), (0.31, 0.20), (0.245, 0.265), (0.51, 0.49),
                 (0.43, 0.56), (0.84, 0.96), (0.45, 1.04), (0.215, 0.665), (0.295, 0.60),
                 (0.075, 0.37), (0.155, 0.305), (-0.05, 0.065)]
@@ -483,7 +505,7 @@ def bolt_curve(name, outline, scale, extrude, bevel, mat):
 
 
 def build_tail(base):
-    tail = bolt_curve('Lightning tail', TAIL_OUTLINE, 1.02, 0.035, 0.03, YELLOW)
+    tail = bolt_curve('Lightning tail', chaikin(TAIL_OUTLINE), 1.02, 0.05, 0.04, YELLOW)
     tail.data.materials.append(BROWN)
     for poly in tail.data.polygons:
         if poly.center.y < 0.17:
@@ -499,7 +521,7 @@ def build_tail(base):
 
 
 # ---------------------------------------------------------------- face
-def face_tube(name, body, dirs, radius, mat, lift=0.006):
+def face_tube(name, body, dirs, radius, mat, lift=0.006, taper=False):
     pts = []
     for d in dirs:
         loc, n = surface_point(body, d)
@@ -511,8 +533,11 @@ def face_tube(name, body, dirs, radius, mat, lift=0.006):
     cu.use_fill_caps = True
     sp = cu.splines.new('NURBS')
     sp.points.add(len(pts) - 1)
-    for p, c in zip(sp.points, pts):
+    for i, (p, c) in enumerate(zip(sp.points, pts)):
         p.co = (*c, 1)
+        if taper:
+            k = i / (len(pts) - 1)
+            p.radius = 0.35 + 0.65 * math.sin(math.pi * k)
     sp.order_u = 3
     sp.use_endpoint_u = True
     sp.resolution_u = 16
@@ -521,7 +546,8 @@ def face_tube(name, body, dirs, radius, mat, lift=0.006):
     bpy.ops.object.shade_smooth()
     caps = []
     for c in (pts[0], pts[-1]):
-        caps.append(uv_sphere(name + ' cap', c, (radius,) * 3, mat, 16, 8))
+        cr = radius * (0.35 if taper else 1.0)
+        caps.append(uv_sphere(name + ' cap', c, (cr,) * 3, mat, 16, 8))
     bpy.ops.object.select_all(action='DESELECT')
     for c in caps:
         c.select_set(True)
@@ -556,7 +582,7 @@ def build_face(body):
         right = Vector((0.18 * side, 1, 0)).normalized()
         up = Vector((0, 0, 1))
         dirs = arc_dirs(centre, right, up, 0.20, -0.07)
-        parts.append(face_tube(name, body, dirs, 0.026, FACE_INK))
+        parts.append(face_tube(name, body, dirs, 0.024, FACE_INK, taper=True))
     # Cheeks: soft red discs that sit on the surface.
     # Cheeks are painted into the body vertex colors.
     nose, _, _ = surface_disc('Nose', body, (-1, 0.0, 0.08), 0.03, 0.022, FACE_INK, -0.006)
@@ -761,7 +787,7 @@ def hair_material(name, color, rough=0.35):
     info = nt.nodes.new('ShaderNodeHairInfo')
     ramp = nt.nodes.new('ShaderNodeMix')
     ramp.data_type = 'RGBA'
-    ramp.inputs['A'].default_value = (color[0] * 0.92, color[1] * 0.88, color[2] * 0.85, 1)
+    ramp.inputs['A'].default_value = (color[0] * 0.96, color[1] * 0.94, color[2] * 0.9, 1)
     ramp.inputs['B'].default_value = (*color, 1)
     nt.links.new(info.outputs['Intercept'], ramp.inputs['Factor'])
     nt.links.new(ramp.outputs['Result'], b.inputs['Base Color'])
@@ -805,7 +831,7 @@ def add_fur(body):
         st.use_even_distribution = True
         st.child_type = 'INTERPOLATED'
         st.child_percent = 2
-        st.rendered_child_count = 10
+        st.rendered_child_count = 16
         st.child_radius = 0.02
         st.clump_factor = V['clump']
         st.clump_shape = 0.3
@@ -813,7 +839,7 @@ def add_fur(body):
         st.roughness_1_size = 1.0
         st.roughness_endpoint = 0.004 * V['frizz'] * 10
         st.roughness_2 = 0.002
-        st.radius_scale = 0.0032
+        st.radius_scale = 0.0022
         st.root_radius = 1.0
         st.tip_radius = 0.1
         st.use_close_tip = True
@@ -828,16 +854,16 @@ def add_fur(body):
     mod = tail.modifiers.new('Fur tail', 'PARTICLE_SYSTEM')
     st = mod.particle_system.settings
     st.type = 'HAIR'
-    st.count = int(V['n'] * 0.12)
-    st.hair_length = L * 0.7
+    st.count = int(V['n'] * 0.30)
+    st.hair_length = L * 0.8
     st.emit_from = 'FACE'
     st.use_even_distribution = True
     st.child_type = 'INTERPOLATED'
-    st.rendered_child_count = 10
+    st.rendered_child_count = 16
     st.child_radius = 0.02
-    st.clump_factor = V['clump']
-    st.roughness_1 = 0.006 * V['frizz'] * 10
-    st.radius_scale = 0.0032
+    st.clump_factor = 0.0
+    st.roughness_1 = 0.002
+    st.radius_scale = 0.0022
     st.tip_radius = 0.1
     st.use_close_tip = True
     st.render_step = 4

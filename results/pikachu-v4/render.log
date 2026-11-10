@@ -1,0 +1,73 @@
+00:00.641  cycles           | WARNING HIPEW initialization failed: Error opening HIP dynamic library
+/workspace/blender-lab/scripts/pikachu_v4.py:77: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  world.use_nodes = True
+/workspace/blender-lab/scripts/pikachu_v4.py:87: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m.use_nodes = True
+BODY_MESH 515848 -> 76724
+/workspace/blender-lab/scripts/pikachu_v4.py:779: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m.use_nodes = True
+Info: Saved as "pikachu-v4.blend"
+INFO Draco mesh compression is available, use library at /opt/blender/blender-5.0.1-linux-x64/5.0/scripts/addons_core/io_scene_gltf2/libextern_draco.so
+05:08:21 | INFO: Starting glTF 2.0 export
+05:08:22 | INFO: Extracting primitive: Cylinder.003
+05:08:22 | INFO: Primitives created: 1
+05:08:22 | INFO: Extracting primitive: Cylinder.002
+05:08:22 | INFO: Primitives created: 1
+05:08:22 | INFO: Extracting primitive: Cylinder.001
+05:08:22 | INFO: Primitives created: 1
+05:08:22 | INFO: Extracting primitive: Cylinder
+05:08:22 | INFO: Primitives created: 1
+05:08:22 | INFO: Extracting primitive: Sphere
+05:08:22 | INFO: Primitives created: 2
+05:08:28 | INFO: Extracting primitive: Pikachu body
+05:08:29 | INFO: Primitives created: 1
+05:08:29 | INFO: Extracting primitive: Far eye closed
+05:08:29 | INFO: Primitives created: 1
+05:08:29 | INFO: Extracting primitive: Mouth
+05:08:29 | INFO: Primitives created: 1
+05:08:29 | INFO: Extracting primitive: Near eye closed
+05:08:29 | INFO: Primitives created: 1
+05:08:29 | INFO: Extracting primitive: Sphere.005
+05:08:29 | INFO: Primitives created: 1
+05:08:29 | INFO: Extracting primitive: Sleep bubble
+05:08:29 | INFO: Primitives created: 1
+05:08:29 | INFO: Extracting primitive: Sphere.008
+05:08:29 | INFO: Primitives created: 1
+05:08:34 | INFO: Extracting primitive: Lightning tail
+05:08:34 | INFO: Primitives created: 2
+05:14:51 | INFO: Finished glTF 2.0 export in 389.8856167793274 s
+08:52.435  render           | Saved: '/workspace/blender-lab/results/pikachu-v4/frames/frame_0001.png'
+
+FRAME_COMPLETE {"frame": 1, "seconds": 31.216}
+09:12.315  render           | Saved: '/workspace/blender-lab/results/pikachu-v4/frames/frame_0002.png'
+FRAME_COMPLETE {"frame": 2, "seconds": 17.892}
+09:33.956  render           | Saved: '/workspace/blender-lab/results/pikachu-v4/frames/frame_0003.png'
+FRAME_COMPLETE {"frame": 3, "seconds": 19.781}
+10:01.592  render           | Saved: '/workspace/blender-lab/results/pikachu-v4/frames/frame_0004.png'
+FRAME_COMPLETE {"frame": 4, "seconds": 26.704}
+10:34.326  render           | Saved: '/workspace/blender-lab/results/pikachu-v4/frames/frame_0005.png'
+FRAME_COMPLETE {"frame": 5, "seconds": 28.709}
+11:06.523  render           | Saved: '/workspace/blender-lab/results/pikachu-v4/frames/frame_0006.png'
+FRAME_COMPLETE {"frame": 6, "seconds": 29.494}
+11:40.766  render           | Saved: '/workspace/blender-lab/results/pikachu-v4/frames/frame_0007.png'
+FRAME_COMPLETE {"frame": 7, "seconds": 30.603}
+12:14.201  render           | Saved: '/workspace/blender-lab/results/pikachu-v4/frames/frame_0008.png'
+FRAME_COMPLETE {"frame": 8, "seconds": 30.605}
+12:47.793  render           | Saved: '/workspace/blender-lab/results/pikachu-v4/frames/frame_0009.png'
+FRAME_COMPLETE {"frame": 9, "seconds": 30.693}
+13:21.395  render           | Saved: '/workspace/blender-lab/results/pikachu-v4/frames/frame_0010.png'
+FRAME_COMPLETE {"frame": 10, "seconds": 30.097}
+13:54.432  render           | Saved: '/workspace/blender-lab/results/pikachu-v4/frames/frame_0011.png'
+FRAME_COMPLETE {"frame": 11, "seconds": 30.276}
+14:28.019  render           | Saved: '/workspace/blender-lab/results/pikachu-v4/frames/frame_0012.png'
+FRAME_COMPLETE {"frame": 12, "seconds": 30.097}
+15:00.303  render           | Saved: '/workspace/blender-lab/results/pikachu-v4/frames/frame_0013.png'
+FRAME_COMPLETE {"frame": 13, "seconds": 29.395}
+15:34.777  render           | Saved: '/workspace/blender-lab/results/pikachu-v4/frames/frame_0014.png'
+FRAME_COMPLETE {"frame": 14, "seconds": 30.905}
+16:08.930  render           | Saved: '/workspace/blender-lab/results/pikachu-v4/frames/frame_0015.png'
+FRAME_COMPLETE {"frame": 15, "seconds": 30.098}
+16:42.751  render           | Saved: '/workspace/blender-lab/results/pikachu-v4/frames/frame_0016.png'
+FRAME_COMPLETE {"frame": 16, "seconds": 30.697}
+17:14.901  render           | Saved: '/workspace/blender-lab/results/pikachu-v4/frames/frame_0017.png'
+FRAME_COMPLETE {"frame": 17, "seconds": 28.796}
