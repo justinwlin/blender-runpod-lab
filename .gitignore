@@ -1,0 +1,10 @@
+.local/
+.env
+.env.*
+__pycache__/
+*.pyc
+*.blend1
+*.pem
+*.key
+*.p12
+downloads/
