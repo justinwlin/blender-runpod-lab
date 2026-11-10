@@ -1,0 +1,4 @@
+interface:
+  display_name: "Blender Runpod Lab"
+  short_description: "Render Blender scenes on remote Runpod GPUs"
+  default_prompt: "Use $blender-runpod-lab to render a simple Blender scene on Runpod and return the image with device and cleanup evidence."

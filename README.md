@@ -22,7 +22,7 @@ It fails if Blender cannot find an OptiX GPU. It does not silently render on the
 
 - [Reference film notes](docs/reference-film.md)
 - [Experiment record](docs/experiment.md)
-- Skill draft will follow the real render test.
+- [Skill draft](SKILL.md)
 
 Never commit API keys, SSH private keys, or raw account responses.
 The `.local/` directory holds local connection files and is ignored by Git.

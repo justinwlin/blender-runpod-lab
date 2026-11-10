@@ -1,6 +1,6 @@
 # First render experiment
 
-Status: prepared; GPU render has not run yet.
+Status: prepared; two GPU allocation requests failed due to capacity. No GPU render has run yet.
 
 ## Access check
 
@@ -24,3 +24,17 @@ Do not assume MCP authentication also authenticates the CLI.
 
 The connected create-pod API does not expose a termination schedule.
 Cleanup must be tracked explicitly; process timeout alone does not stop pod billing.
+
+## Allocation attempts
+
+1. RTX 5090, Secure Cloud, EU-RO-1, one GPU: capacity error, no pod created.
+2. RTX 5090, Community Cloud, one GPU: capacity error, no pod created.
+
+The Community Cloud catalog showed LOW RTX 5090 availability at $0.69/hour.
+Both clouds showed NONE for RTX 4090 at inspection.
+The create API rejected both 5090 allocations despite the LOW catalog result.
+The catalog is advisory; only a successful create response confirms allocation.
+
+The private repository was created and its private status was verified.
+The scene script passed Python syntax validation. The setup script passed Bash syntax validation.
+These checks do not establish Blender execution or GPU output.
