@@ -1,0 +1,58 @@
+scripts/build_cat_persona.py:71: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m.use_nodes = True
+scripts/build_cat_persona.py:492: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  world=bpy.data.worlds.new('Studio ambient'); s.world=world; world.use_nodes=True
+EGL Error (0x3009): EGL_BAD_MATCH: Arguments are inconsistent (for example, a valid context requires buffers not supplied by a valid surface).
+EGL Error (0x3009): EGL_BAD_MATCH: Arguments are inconsistent (for example, a valid context requires buffers not supplied by a valid surface).
+EGL Error (0x3009): EGL_BAD_MATCH: Arguments are inconsistent (for example, a valid context requires buffers not supplied by a valid surface).
+00:09.130  render           | Saved: 'results/cat-persona/idle/frames/0001.png'
+00:14.240  render           | Saved: 'results/cat-persona/idle/frames/0002.png'
+00:18.716  render           | Saved: 'results/cat-persona/idle/frames/0003.png'
+00:23.462  render           | Saved: 'results/cat-persona/idle/frames/0004.png'
+00:28.884  render           | Saved: 'results/cat-persona/idle/frames/0005.png'
+00:33.882  render           | Saved: 'results/cat-persona/idle/frames/0006.png'
+00:38.969  render           | Saved: 'results/cat-persona/idle/frames/0007.png'
+00:44.021  render           | Saved: 'results/cat-persona/idle/frames/0008.png'
+00:48.648  render           | Saved: 'results/cat-persona/idle/frames/0009.png'
+00:53.275  render           | Saved: 'results/cat-persona/idle/frames/0010.png'
+00:57.865  render           | Saved: 'results/cat-persona/idle/frames/0011.png'
+01:02.704  render           | Saved: 'results/cat-persona/idle/frames/0012.png'
+01:07.661  render           | Saved: 'results/cat-persona/idle/frames/0013.png'
+01:12.371  render           | Saved: 'results/cat-persona/idle/frames/0014.png'
+01:17.853  render           | Saved: 'results/cat-persona/idle/frames/0015.png'
+01:22.528  render           | Saved: 'results/cat-persona/idle/frames/0016.png'
+01:27.204  render           | Saved: 'results/cat-persona/idle/frames/0017.png'
+01:32.719  render           | Saved: 'results/cat-persona/idle/frames/0018.png'
+01:37.490  render           | Saved: 'results/cat-persona/idle/frames/0019.png'
+01:42.188  render           | Saved: 'results/cat-persona/idle/frames/0020.png'
+01:46.887  render           | Saved: 'results/cat-persona/idle/frames/0021.png'
+01:51.766  render           | Saved: 'results/cat-persona/idle/frames/0022.png'
+01:56.702  render           | Saved: 'results/cat-persona/idle/frames/0023.png'
+02:01.842  render           | Saved: 'results/cat-persona/idle/frames/0024.png'
+02:06.935  render           | Saved: 'results/cat-persona/idle/frames/0025.png'
+02:11.838  render           | Saved: 'results/cat-persona/idle/frames/0026.png'
+02:16.806  render           | Saved: 'results/cat-persona/idle/frames/0027.png'
+02:21.843  render           | Saved: 'results/cat-persona/idle/frames/0028.png'
+02:26.952  render           | Saved: 'results/cat-persona/idle/frames/0029.png'
+02:32.105  render           | Saved: 'results/cat-persona/idle/frames/0030.png'
+02:37.662  render           | Saved: 'results/cat-persona/idle/frames/0031.png'
+02:43.069  render           | Saved: 'results/cat-persona/idle/frames/0032.png'
+02:48.284  render           | Saved: 'results/cat-persona/idle/frames/0033.png'
+02:53.720  render           | Saved: 'results/cat-persona/idle/frames/0034.png'
+02:58.873  render           | Saved: 'results/cat-persona/idle/frames/0035.png'
+03:03.949  render           | Saved: 'results/cat-persona/idle/frames/0036.png'
+03:08.877  render           | Saved: 'results/cat-persona/idle/frames/0037.png'
+03:13.741  render           | Saved: 'results/cat-persona/idle/frames/0038.png'
+03:18.480  render           | Saved: 'results/cat-persona/idle/frames/0039.png'
+03:23.363  render           | Saved: 'results/cat-persona/idle/frames/0040.png'
+03:28.379  render           | Saved: 'results/cat-persona/idle/frames/0041.png'
+03:34.091  render           | Saved: 'results/cat-persona/idle/frames/0042.png'
+03:39.133  render           | Saved: 'results/cat-persona/idle/frames/0043.png'
+03:45.173  render           | Saved: 'results/cat-persona/idle/frames/0044.png'
+03:50.398  render           | Saved: 'results/cat-persona/idle/frames/0045.png'
+03:55.601  render           | Saved: 'results/cat-persona/idle/frames/0046.png'
+04:00.797  render           | Saved: 'results/cat-persona/idle/frames/0047.png'
+04:06.366  render           | Saved: 'results/cat-persona/idle/frames/0048.png'
+Blender 5.0.1 (hash a3db93c5b259 built 2025-12-16 01:30:59)
+
+Blender quit

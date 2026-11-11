@@ -1,0 +1,258 @@
+{
+  "blender_version": "5.0.1",
+  "backend": "EEVEE CPU software",
+  "preview": true,
+  "resolution": [
+    480,
+    480
+  ],
+  "samples": 12,
+  "backdrop": "studio",
+  "fps": 24,
+  "loop_period_frames": 48,
+  "revision": "feedback-2",
+  "head_scale": 1.23,
+  "torso_scale": 0.83,
+  "renders": [
+    {
+      "file": "frames/0001.png",
+      "frame": 1,
+      "seconds": 5.674
+    },
+    {
+      "file": "frames/0002.png",
+      "frame": 2,
+      "seconds": 5.068
+    },
+    {
+      "file": "frames/0003.png",
+      "frame": 3,
+      "seconds": 4.461
+    },
+    {
+      "file": "frames/0004.png",
+      "frame": 4,
+      "seconds": 4.741
+    },
+    {
+      "file": "frames/0005.png",
+      "frame": 5,
+      "seconds": 5.408
+    },
+    {
+      "file": "frames/0006.png",
+      "frame": 6,
+      "seconds": 4.974
+    },
+    {
+      "file": "frames/0007.png",
+      "frame": 7,
+      "seconds": 5.091
+    },
+    {
+      "file": "frames/0008.png",
+      "frame": 8,
+      "seconds": 5.027
+    },
+    {
+      "file": "frames/0009.png",
+      "frame": 9,
+      "seconds": 4.614
+    },
+    {
+      "file": "frames/0010.png",
+      "frame": 10,
+      "seconds": 4.615
+    },
+    {
+      "file": "frames/0011.png",
+      "frame": 11,
+      "seconds": 4.578
+    },
+    {
+      "file": "frames/0012.png",
+      "frame": 12,
+      "seconds": 4.826
+    },
+    {
+      "file": "frames/0013.png",
+      "frame": 13,
+      "seconds": 4.948
+    },
+    {
+      "file": "frames/0014.png",
+      "frame": 14,
+      "seconds": 4.702
+    },
+    {
+      "file": "frames/0015.png",
+      "frame": 15,
+      "seconds": 5.463
+    },
+    {
+      "file": "frames/0016.png",
+      "frame": 16,
+      "seconds": 4.663
+    },
+    {
+      "file": "frames/0017.png",
+      "frame": 17,
+      "seconds": 4.666
+    },
+    {
+      "file": "frames/0018.png",
+      "frame": 18,
+      "seconds": 5.502
+    },
+    {
+      "file": "frames/0019.png",
+      "frame": 19,
+      "seconds": 4.757
+    },
+    {
+      "file": "frames/0020.png",
+      "frame": 20,
+      "seconds": 4.685
+    },
+    {
+      "file": "frames/0021.png",
+      "frame": 21,
+      "seconds": 4.685
+    },
+    {
+      "file": "frames/0022.png",
+      "frame": 22,
+      "seconds": 4.872
+    },
+    {
+      "file": "frames/0023.png",
+      "frame": 23,
+      "seconds": 4.927
+    },
+    {
+      "file": "frames/0024.png",
+      "frame": 24,
+      "seconds": 5.121
+    },
+    {
+      "file": "frames/0025.png",
+      "frame": 25,
+      "seconds": 5.088
+    },
+    {
+      "file": "frames/0026.png",
+      "frame": 26,
+      "seconds": 4.881
+    },
+    {
+      "file": "frames/0027.png",
+      "frame": 27,
+      "seconds": 4.957
+    },
+    {
+      "file": "frames/0028.png",
+      "frame": 28,
+      "seconds": 5.026
+    },
+    {
+      "file": "frames/0029.png",
+      "frame": 29,
+      "seconds": 5.105
+    },
+    {
+      "file": "frames/0030.png",
+      "frame": 30,
+      "seconds": 5.145
+    },
+    {
+      "file": "frames/0031.png",
+      "frame": 31,
+      "seconds": 5.536
+    },
+    {
+      "file": "frames/0032.png",
+      "frame": 32,
+      "seconds": 5.397
+    },
+    {
+      "file": "frames/0033.png",
+      "frame": 33,
+      "seconds": 5.204
+    },
+    {
+      "file": "frames/0034.png",
+      "frame": 34,
+      "seconds": 5.415
+    },
+    {
+      "file": "frames/0035.png",
+      "frame": 35,
+      "seconds": 5.14
+    },
+    {
+      "file": "frames/0036.png",
+      "frame": 36,
+      "seconds": 5.063
+    },
+    {
+      "file": "frames/0037.png",
+      "frame": 37,
+      "seconds": 4.909
+    },
+    {
+      "file": "frames/0038.png",
+      "frame": 38,
+      "seconds": 4.858
+    },
+    {
+      "file": "frames/0039.png",
+      "frame": 39,
+      "seconds": 4.72
+    },
+    {
+      "file": "frames/0040.png",
+      "frame": 40,
+      "seconds": 4.876
+    },
+    {
+      "file": "frames/0041.png",
+      "frame": 41,
+      "seconds": 5.009
+    },
+    {
+      "file": "frames/0042.png",
+      "frame": 42,
+      "seconds": 5.696
+    },
+    {
+      "file": "frames/0043.png",
+      "frame": 43,
+      "seconds": 5.028
+    },
+    {
+      "file": "frames/0044.png",
+      "frame": 44,
+      "seconds": 6.03
+    },
+    {
+      "file": "frames/0045.png",
+      "frame": 45,
+      "seconds": 5.208
+    },
+    {
+      "file": "frames/0046.png",
+      "frame": 46,
+      "seconds": 5.19
+    },
+    {
+      "file": "frames/0047.png",
+      "frame": 47,
+      "seconds": 5.18
+    },
+    {
+      "file": "frames/0048.png",
+      "frame": 48,
+      "seconds": 5.563
+    }
+  ]
+}

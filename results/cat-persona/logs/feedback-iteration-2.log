@@ -1,0 +1,14 @@
+scripts/build_cat_persona.py:71: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m.use_nodes = True
+scripts/build_cat_persona.py:442: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  world=bpy.data.worlds.new('Studio ambient'); s.world=world; world.use_nodes=True
+EGL Error (0x3009): EGL_BAD_MATCH: Arguments are inconsistent (for example, a valid context requires buffers not supplied by a valid surface).
+EGL Error (0x3009): EGL_BAD_MATCH: Arguments are inconsistent (for example, a valid context requires buffers not supplied by a valid surface).
+EGL Error (0x3009): EGL_BAD_MATCH: Arguments are inconsistent (for example, a valid context requires buffers not supplied by a valid surface).
+00:12.364  render           | Saved: 'results/cat-persona/feedback-1/iteration-2/front.png'
+00:19.456  render           | Saved: 'results/cat-persona/feedback-1/iteration-2/three_quarter.png'
+00:25.967  render           | Saved: 'results/cat-persona/feedback-1/iteration-2/side.png'
+00:32.433  render           | Saved: 'results/cat-persona/feedback-1/iteration-2/back.png'
+Blender 5.0.1 (hash a3db93c5b259 built 2025-12-16 01:30:59)
+
+Blender quit

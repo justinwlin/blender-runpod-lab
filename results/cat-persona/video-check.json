@@ -1,0 +1,15 @@
+{
+  "video": "idle-test.mp4",
+  "resolution": [
+    480,
+    480
+  ],
+  "frames": 48,
+  "fps": 24,
+  "duration_seconds": 2,
+  "render_seconds": 242.292,
+  "frame_seconds_min": 4.461,
+  "frame_seconds_max": 6.03,
+  "encode_seconds": 0.27,
+  "retained_bytes": 7661407
+}

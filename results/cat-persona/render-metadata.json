@@ -1,0 +1,38 @@
+{
+  "blender_version": "5.0.1",
+  "backend": "EEVEE CPU software",
+  "preview": true,
+  "resolution": [
+    640,
+    640
+  ],
+  "samples": 24,
+  "backdrop": "studio",
+  "fps": 24,
+  "loop_period_frames": 48,
+  "revision": "feedback-2",
+  "head_scale": 1.23,
+  "torso_scale": 0.83,
+  "renders": [
+    {
+      "file": "front.png",
+      "frame": 1,
+      "seconds": 10.092
+    },
+    {
+      "file": "three_quarter.png",
+      "frame": 1,
+      "seconds": 9.412
+    },
+    {
+      "file": "side.png",
+      "frame": 1,
+      "seconds": 9.83
+    },
+    {
+      "file": "back.png",
+      "frame": 1,
+      "seconds": 9.228
+    }
+  ]
+}

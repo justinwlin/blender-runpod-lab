@@ -1,0 +1,23 @@
+{
+  "blender_version": "5.0.1",
+  "backend": "CPU",
+  "preview": true,
+  "resolution": [
+    160,
+    160
+  ],
+  "samples": 2,
+  "backdrop": "studio",
+  "fps": 24,
+  "loop_period_frames": 48,
+  "revision": "feedback-2",
+  "head_scale": 1.23,
+  "torso_scale": 0.83,
+  "renders": [
+    {
+      "file": "three_quarter.png",
+      "frame": 1,
+      "seconds": 0.62
+    }
+  ]
+}

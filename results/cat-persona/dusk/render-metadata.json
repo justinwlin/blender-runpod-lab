@@ -1,0 +1,23 @@
+{
+  "blender_version": "5.0.1",
+  "backend": "EEVEE CPU software",
+  "preview": true,
+  "resolution": [
+    640,
+    640
+  ],
+  "samples": 32,
+  "backdrop": "dusk",
+  "fps": 24,
+  "loop_period_frames": 48,
+  "revision": "feedback-2",
+  "head_scale": 1.23,
+  "torso_scale": 0.83,
+  "renders": [
+    {
+      "file": "dusk.png",
+      "frame": 1,
+      "seconds": 18.891
+    }
+  ]
+}

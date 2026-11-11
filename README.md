@@ -58,6 +58,7 @@ It fails if Blender cannot find an OptiX GPU. It does not silently render on the
 
 ## Project notes
 
+- [Silver tabby cat persona](docs/cat-persona.md)
 - [Reference film notes](docs/reference-film.md)
 - [Experiment record](docs/experiment.md)
 - [Skill draft](SKILL.md)

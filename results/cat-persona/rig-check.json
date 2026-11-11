@@ -1,0 +1,33 @@
+{
+  "bones": [
+    "root",
+    "spine",
+    "head",
+    "ear.L",
+    "ear.R",
+    "arm.L",
+    "arm.R",
+    "leg.L",
+    "leg.R",
+    "tail.0",
+    "tail.1",
+    "tail.2"
+  ],
+  "mesh_objects": 206,
+  "rigged_meshes": 205,
+  "loop_max_matrix_error": 8.57252763722393e-18,
+  "blink_at_49": {
+    "Sleepy upper eyelid.L": 0.0,
+    "Sleepy upper eyelid.R": 0.0
+  },
+  "round_head_width": 1.9310507774353027,
+  "head_width": 2.1030598878860474,
+  "sleeves_outer_width": 2.033926010131836,
+  "shoulders_width": 2.0010451078414917,
+  "head_to_shoulders_width_ratio": 1.0509807498315709,
+  "blink_at_21": {
+    "Sleepy upper eyelid.L": 1.0,
+    "Sleepy upper eyelid.R": 1.0
+  },
+  "blink_render_seconds": 8.047
+}

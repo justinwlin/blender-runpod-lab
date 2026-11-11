@@ -1,0 +1,177 @@
+{
+  "iteration-1": {
+    "blender_version": "5.0.1",
+    "backend": "EEVEE CPU software",
+    "preview": true,
+    "resolution": [
+      640,
+      640
+    ],
+    "samples": 12,
+    "backdrop": "studio",
+    "renders": [
+      {
+        "file": "three_quarter.png",
+        "frame": 1,
+        "seconds": 22.031
+      }
+    ]
+  },
+  "iteration-2": {
+    "blender_version": "5.0.1",
+    "backend": "EEVEE CPU software",
+    "preview": true,
+    "resolution": [
+      640,
+      640
+    ],
+    "samples": 12,
+    "backdrop": "studio",
+    "renders": [
+      {
+        "file": "three_quarter.png",
+        "frame": 1,
+        "seconds": 4.446
+      }
+    ]
+  },
+  "iteration-3": {
+    "blender_version": "5.0.1",
+    "backend": "EEVEE CPU software",
+    "preview": true,
+    "resolution": [
+      640,
+      640
+    ],
+    "samples": 16,
+    "backdrop": "studio",
+    "fps": 24,
+    "loop_period_frames": 48,
+    "renders": [
+      {
+        "file": "three_quarter.png",
+        "frame": 1,
+        "seconds": 5.821
+      }
+    ]
+  },
+  "feedback-1/iteration-1": {
+    "blender_version": "5.0.1",
+    "backend": "EEVEE CPU software",
+    "preview": true,
+    "resolution": [
+      640,
+      640
+    ],
+    "samples": 16,
+    "backdrop": "studio",
+    "fps": 24,
+    "loop_period_frames": 48,
+    "renders": [
+      {
+        "file": "three_quarter.png",
+        "frame": 1,
+        "seconds": 7.138
+      }
+    ]
+  },
+  "feedback-1/iteration-2": {
+    "blender_version": "5.0.1",
+    "backend": "EEVEE CPU software",
+    "preview": true,
+    "resolution": [
+      640,
+      640
+    ],
+    "samples": 16,
+    "backdrop": "studio",
+    "fps": 24,
+    "loop_period_frames": 48,
+    "revision": "feedback-1",
+    "head_scale": 1.23,
+    "torso_scale": 0.83,
+    "renders": [
+      {
+        "file": "front.png",
+        "frame": 1,
+        "seconds": 8.973
+      },
+      {
+        "file": "three_quarter.png",
+        "frame": 1,
+        "seconds": 7.091
+      },
+      {
+        "file": "side.png",
+        "frame": 1,
+        "seconds": 6.513
+      },
+      {
+        "file": "back.png",
+        "frame": 1,
+        "seconds": 6.469
+      }
+    ]
+  },
+  "feedback-1/iteration-2-dusk": {
+    "blender_version": "5.0.1",
+    "backend": "EEVEE CPU software",
+    "preview": true,
+    "resolution": [
+      640,
+      640
+    ],
+    "samples": 24,
+    "backdrop": "dusk",
+    "fps": 24,
+    "loop_period_frames": 48,
+    "revision": "feedback-1",
+    "head_scale": 1.23,
+    "torso_scale": 0.83,
+    "renders": [
+      {
+        "file": "dusk.png",
+        "frame": 1,
+        "seconds": 15.428
+      }
+    ]
+  },
+  "feedback-1/iteration-3": {
+    "blender_version": "5.0.1",
+    "backend": "EEVEE CPU software",
+    "preview": true,
+    "resolution": [
+      640,
+      640
+    ],
+    "samples": 24,
+    "backdrop": "studio",
+    "fps": 24,
+    "loop_period_frames": 48,
+    "revision": "feedback-1",
+    "head_scale": 1.23,
+    "torso_scale": 0.83,
+    "renders": [
+      {
+        "file": "front.png",
+        "frame": 1,
+        "seconds": 10.614
+      },
+      {
+        "file": "three_quarter.png",
+        "frame": 1,
+        "seconds": 8.972
+      },
+      {
+        "file": "side.png",
+        "frame": 1,
+        "seconds": 9.443
+      },
+      {
+        "file": "back.png",
+        "frame": 1,
+        "seconds": 9.553
+      }
+    ]
+  }
+}
