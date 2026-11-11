@@ -43,6 +43,12 @@ This result verifies the workflow on the fallback GPU, not 4090 or 5090 performa
 
 Download the [editable scene](results/first-light.blend) or inspect the [render metadata](results/render-metadata.json).
 
+## Default way to run Blender on Runpod
+
+Use the personal-account template **`blender-5.0.1`**, which pulls the public image `ghcr.io/justinwlin/blender-runpod:5.0.1`. Blender 5.0.1, the X/GL libraries, SSH, Jupyter, and the blender-mcp socket are already in the image, so a pod does not install them at boot.
+
+Full tags, digest, port map, launch steps, measured timings, GPU prices, MCP tunnel instructions, and gotchas are in [docs/docker-template.md](docs/docker-template.md). Character-modeling lessons (what scripted primitives and metaballs did and did not achieve) are in [docs/lessons-character-modeling.md](docs/lessons-character-modeling.md).
+
 ## Run the scene
 
 Use a Linux Runpod GPU pod with NVIDIA graphics driver access.
@@ -58,6 +64,9 @@ It fails if Blender cannot find an OptiX GPU. It does not silently render on the
 
 ## Project notes
 
+- [Blender 5.0.1 Runpod image and template](docs/docker-template.md) — default way to run Blender on Runpod
+- [Lessons: character modeling](docs/lessons-character-modeling.md)
+- [High-fidelity character guide notes](docs/high-fidelity-character-guide.md)
 - [Reference film notes](docs/reference-film.md)
 - [Experiment record](docs/experiment.md)
 - [Skill draft](SKILL.md)

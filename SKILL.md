@@ -6,6 +6,8 @@ description: Render Blender scenes on Runpod GPUs, return visible image or anima
 # Blender on Runpod
 
 Use this repository as a small render experiment before a larger farm run.
+The default way to run Blender on Runpod is the personal-account template **`blender-5.0.1`** (`ghcr.io/justinwlin/blender-runpod:5.0.1`). Read [the Docker template record](docs/docker-template.md) for the image digest, port map, launch steps, timings, prices, MCP tunnel, and gotchas.
+Read [character-modeling lessons](docs/lessons-character-modeling.md) before trying to script a cute character from primitives.
 Read [the experiment record](docs/experiment.md) for verified results and known limits.
 Read [the film reference](docs/reference-film.md) only when the user asks about frame distribution or the original example.
 
@@ -32,14 +34,13 @@ If automatic termination is unavailable, state that limit and keep an explicit c
 
 ## Small render
 
-1. Prefer a maintained Blender image when one fits the required version and GPU.
-2. Otherwise use a known Linux base with NVIDIA driver libraries exposed to the container.
-3. Upload `scripts/` through SSH or SCP.
-4. Run `bash scripts/setup_blender.sh` to install the pinned Blender binary and verify its checksum.
-5. Run `blender -b --python scripts/render_demo.py -- --output results`.
-6. Download the PNG, `.blend` file, metadata, and relevant logs.
-7. Inspect the image. Check that metadata lists an enabled OptiX GPU and a complete render.
-8. Delete the task pod. Confirm that it is absent or returns 404.
+1. Prefer the **`blender-5.0.1`** Runpod template on the personal account (image `ghcr.io/justinwlin/blender-runpod:5.0.1`). It already has Blender 5.0.1, the X/GL libraries, SSH, Jupyter, and blender-mcp. See [docs/docker-template.md](docs/docker-template.md).
+2. If that template cannot be used, prefer another maintained Blender image that fits the required version and GPU. Otherwise use a known Linux base with NVIDIA driver libraries exposed to the container, then run `bash scripts/setup_blender.sh` to install the pinned Blender binary and verify its checksum. Do not rely on `apt` on a live pod to install X/GL libraries; mirrors can hang.
+3. Upload `scripts/` through SSH or SCP if they are not already on the volume.
+4. Run `blender -b --python scripts/render_demo.py -- --output results`.
+5. Download the PNG, `.blend` file, metadata, and relevant logs.
+6. Inspect the image. Check that metadata lists an enabled OptiX GPU and a complete render.
+7. Delete only the task pod created for this work. Confirm that it is absent or returns 404. Do not terminate other agents' pods.
 
 The demo script refuses a silent CPU fallback. A started pod or a successful package install is not a render result.
 Use the same Blender release and add-on versions as an existing user scene.
