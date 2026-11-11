@@ -49,8 +49,16 @@ fi
 if [ "${START_BLENDER_MCP:-1}" = "1" ]; then
   # The official addon refuses blender -b (no main-thread timers).
   # A virtual display lets the socket server start and stay up.
-  export DISPLAY="${DISPLAY:-:99}"
+  # Force X11: Blender 5 otherwise tries Wayland and exits if
+  # XDG_RUNTIME_DIR is unset.
+  mkdir -p /tmp/runtime-root
+  chmod 700 /tmp/runtime-root
+  export XDG_RUNTIME_DIR=/tmp/runtime-root
+  export XDG_SESSION_TYPE=x11
+  export GDK_BACKEND=x11
+  unset WAYLAND_DISPLAY || true
   nohup xvfb-run --auto-servernum --server-args='-screen 0 1280x720x24' \
+    env XDG_RUNTIME_DIR=/tmp/runtime-root XDG_SESSION_TYPE=x11 GDK_BACKEND=x11 \
     blender --python /opt/blender/start_mcp.py \
     >/var/log/blender-mcp.log 2>&1 &
   echo "Blender MCP starting on ${BLENDER_MCP_PORT:-9876} (see /var/log/blender-mcp.log)"

@@ -38,6 +38,28 @@ To rebuild by hand once a machine has Docker:
 docker build -t ghcr.io/justinwlin/blender-runpod:5.0.1 docker/blender
 ```
 
+
+## Faster rebuilds with Depot
+
+GitHub Actions produced the current public image (tags `5.0.1` and `latest`). Depot is the faster rebuild path when you need to iterate on the Dockerfile.
+
+1. Install the official CLI to `~/.local/bin` (`curl -fsSL https://depot.dev/install-cli.sh | DEPOT_INSTALL_DIR="$HOME/.local/bin" sh`).
+2. Authenticate with an org-authorized `DEPOT_TOKEN` (or `depot login`).
+3. `depot projects list`, or `depot projects create` a project named `blender-runpod`, then `depot init` so this repo has a `depot.json` with that project's id (the id is not a secret).
+4. Log in to GHCR (`echo "$GH_TOKEN" | docker login ghcr.io -u USERNAME --password-stdin`; the token needs `write:packages`).
+5. From the repo root:
+
+```sh
+depot build --platform linux/amd64 --push \
+  -t ghcr.io/justinwlin/blender-runpod:5.0.1 \
+  -t ghcr.io/justinwlin/blender-runpod:latest \
+  docker/blender
+```
+
+A `depot.json` is not in the repo yet: the `DEPOT_TOKEN` available when this was first documented was not authorized to list or create Depot projects (`permission_denied: Not authorized`). Add the file once a project exists.
+
+The GHCR package must stay **public** so Runpod can pull it without a registry credential. After the first Actions push, anonymous pulls of `ghcr.io/justinwlin/blender-runpod:5.0.1` succeeded (the workflow's visibility API call 404'd on `/user/packages/container/blender-runpod/visibility`, but the package was already public because it is linked to this public repo).
+
 ## Entrypoint
 
 [`docker/blender/entrypoint.sh`](../docker/blender/entrypoint.sh) starts, in order:

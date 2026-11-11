@@ -109,3 +109,8 @@ Spec followed: [Sophie's high-fidelity 3D model guide](https://github.com/sophie
 - The dressed preview reads as a white blob with a pasted-on face: fur colour and tabby stripes are missing, hair is a thin strip instead of messy clumps, the head lacks the concept's big rounded silhouette, and the clothes read as thin shells.
 - Scripted bmesh offsets cannot stand in for a sculpt pass (guide §10). The head, jowls, back of skull and the hair would need a human sculpt pass, or a clean base mesh (guide §8), to reach the concept.
 - No hero Cycles still, side-by-side, or idle mp4 were rendered.
+
+## vinyl-v1 (experiment, preview only)
+
+Status: **preview experiment, not a match for the cute vinyl mascot.** Script: `scripts/build_cat_vinyl.py`. Outputs: `results/cat-persona/vinyl-v1/` (hero still, 4-view sheet, side-by-side vs `simple.jpg`). Honest notes: `results/cat-persona/vinyl-v1/NOTES.md`. Rendered on the new `blender-5.0.1` Runpod template; the image/template/OptiX path worked, the scripted metaball body did not fuse into one toy silhouette.
+

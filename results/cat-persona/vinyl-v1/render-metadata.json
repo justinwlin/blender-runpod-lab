@@ -1,0 +1,66 @@
+{
+  "version": "vinyl-v1",
+  "experiment": true,
+  "note": "Preview experiment of a simple vinyl-toy cat mascot. Not a verified final.",
+  "blender_version": "5.0.1",
+  "backend": "OPTIX",
+  "samples": 32,
+  "resolution": [
+    1080,
+    1080
+  ],
+  "contact_resolution": 720,
+  "denoiser": "OpenImageDenoise",
+  "view_transform": "AgX",
+  "proportions": {
+    "TOTAL_HEIGHT": 1.7,
+    "HEAD_RATIO": 0.58,
+    "measured_height": 1.5888,
+    "measured_head_ratio": 0.5594,
+    "measured_width": 1.0087,
+    "measured_depth": 0.8182,
+    "eye_widths_across": 3.8584,
+    "vertices": 21452,
+    "faces": 21410
+  },
+  "render_devices": [
+    {
+      "name": "NVIDIA L40S",
+      "type": "OPTIX",
+      "enabled": true
+    },
+    {
+      "name": "AMD EPYC 9354 32-Core Processor",
+      "type": "CPU",
+      "enabled": false
+    },
+    {
+      "name": "NVIDIA L40S",
+      "type": "CUDA",
+      "enabled": false
+    }
+  ],
+  "renders": [
+    {
+      "file": "hero_three_quarter.png",
+      "seconds": 8.386
+    },
+    {
+      "file": "front.png",
+      "seconds": 4.475
+    },
+    {
+      "file": "side.png",
+      "seconds": 4.447
+    },
+    {
+      "file": "top.png",
+      "seconds": 4.537
+    },
+    {
+      "file": "three_quarter.png",
+      "seconds": 4.148
+    }
+  ],
+  "wall_seconds": 33.552
+}

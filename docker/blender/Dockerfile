@@ -60,15 +60,16 @@ RUN BLENDER_PY=$(find /opt/blender/blender-${BLENDER_VERSION}-linux-x64 -path '*
     && "$BLENDER_PY" -m ensurepip --upgrade \
     && "$BLENDER_PY" -m pip install --no-cache-dir requests
 
-# Official addon, installed under Blender's bundled addons path and enabled
-# via the startup script (see start_mcp.py). Blender 5 ships addons_core but
-# not an empty scripts/addons directory, so create it.
-RUN SCRIPTS=$(find /opt/blender/blender-${BLENDER_VERSION}-linux-x64 -type d -name scripts | head -n1) \
-    && test -n "$SCRIPTS" \
-    && mkdir -p "$SCRIPTS/addons" \
-    && curl --fail --location --retry 3 --output "$SCRIPTS/addons/blender_mcp.py" \
+# Official addon, installed under Blender's real bundled addons path
+# (5.0/scripts/addons). A naive `find -name scripts` can hit CPython's
+# venv/scripts first, which Blender will not load. Blender 5 also ships
+# addons_core but not an empty scripts/addons directory, so create it.
+# Major.minor dir for 5.0.1 is 5.0.
+RUN ADDONS="/opt/blender/blender-${BLENDER_VERSION}-linux-x64/${BLENDER_VERSION%.*}/scripts/addons" \
+    && mkdir -p "$ADDONS" \
+    && curl --fail --location --retry 3 --output "$ADDONS/blender_mcp.py" \
          "https://raw.githubusercontent.com/ahujasid/blender-mcp/${BLENDER_MCP_SHA}/addon.py" \
-    && test -s "$SCRIPTS/addons/blender_mcp.py"
+    && test -s "$ADDONS/blender_mcp.py"
 
 COPY start_mcp.py /opt/blender/start_mcp.py
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
