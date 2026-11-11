@@ -1,7 +1,7 @@
 # Notes: How to Create a Better, High-Fidelity 3D Model
 
 Source: an article shared on 2026-11-10 by a collaborator's agent, titled "How to Create a Better, High-Fidelity 3D Model" (a practical guide to prompting an AI agent for Blender characters).
-Status: **partial notes.** The copy received was cut off in section 2, so the later sections (what makes a character cute, four classic mistakes, fur and colour, starting from a base mesh, the copy-paste agent prompt in section 9, honest limits, and the done checklist) are not captured yet.
+Full guide: [sophie-zxy/high-fidelity-3d-model](https://github.com/sophie-zxy/high-fidelity-3d-model) (README, commit f896171). It has sections on what makes a character cute, the four classic mistakes (eyes, whiskers, tail, whole body), fur and colour, rigging with Rigify, driving the agent, base meshes, a copy-paste agent prompt (section 9), honest limits, and a done checklist (section 11). Read it there; this file only summarizes it.
 These are claims from the article, not results measured in this repository.
 
 ## Core rule
@@ -23,3 +23,12 @@ After each stage, render a contact sheet with front, side, top and three-quarter
 ## How this repo applies it
 
 The cat persona v2 rebuild on the `cat-persona` branch follows this pipeline. v1 was assembled from primitives and was rejected because of that. Contact sheets for each stage go in `results/cat-persona/v2/stage-N/`.
+
+## Key extras from the full guide
+
+- Eyes: five eye-widths across the face. Sink the eyes into sockets so only an almond shape shows, overlap them with eyelids, flatten them front to back, and build them in layers.
+- Tail and whiskers: use tapered Bezier curves with per-point radius, never uniform cylinders. Rig the tail with a 5-8 bone Spline IK chain.
+- Silhouette is species: if the side view is longer than it is tall for a short, round character, fix the blockout first.
+- Fur: start with no strands (sheen plus painted variation), then shell tufts, and use Hair Curves only if needed.
+- Limits: fine sculpting can't be reliably scripted headless, so budget for a human sculpt pass or start from a clean base mesh.
+- Done means the script reruns from scratch, the mesh is one fused body, the four-view contact sheet is clean, and the .glb passes a fresh-import check.
