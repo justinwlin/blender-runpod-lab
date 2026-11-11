@@ -91,3 +91,21 @@ The **ESTIMATE** below brackets RTX PRO 6000 performance between **4.69 and 28.5
 | Four turnarounds + dusk + idle, 53 frames | 248.57–1515.36 s; $0.172–1.048 | 497.14–6061.43 s; $0.079–0.960 |
 
 Arithmetic for 53 frames: `53 × (4.69 to 28.59165) / 3600 × $2.49` for the 6000. Multiply the lower seconds by 2 and upper seconds by 4, then use `$0.57`, for the 4000. These are render-only **ESTIMATES**. A hypothetical five-minute startup/inspection allowance adds `5/60 × rate`, or **$0.0475** / **$0.2075** for 4000 / 6000, before storage and billing increments.
+
+## v2 (rejected experiment, stopped early)
+
+Status: **rejected by Justin at the dressed-preview stage and stopped**. Kept for reference only; not a verified result.
+
+Spec followed: [Sophie's high-fidelity 3D model guide](https://github.com/sophie-zxy/high-fidelity-3d-model) (commit f896171), §2 five-stage pipeline, §5 four classic mistakes, §9 hard rules, §11 done checklist.
+
+### Verified
+- `scripts/build_cat_persona_v2.py` runs headless on pinned Blender 5.0.1 and stops after each gate with `--stage N`; proportions are named constants with asserts.
+- `scripts/contact_sheet.py` renders front / side / top / three-quarter contact sheets of any saved scene.
+- Gates completed: stage 1 (mirrored Skin-cage blockout), stage 2 (voxel-remesh fuse into one skin), stage 3 (scripted primary/secondary/tertiary offsets), stage 4 (QuadriFlow quads + armature weights). Contact sheets and critiques: `results/cat-persona/v2/stage-N/`.
+- A first dressed preview contact sheet, `.blend` and `.glb`: `results/cat-persona/v2/preview/`.
+- Render host: one Runpod CPU pod (cpu3c, 32 vCPU, $0.96/hr, about 37 min). A Runpod RTX 4090 pod ($0.89/hr, about 24 min) was set up for the hero render but never rendered. Total spend about $0.94.
+
+### Experimental / why it was rejected
+- The dressed preview reads as a white blob with a pasted-on face: fur colour and tabby stripes are missing, hair is a thin strip instead of messy clumps, the head lacks the concept's big rounded silhouette, and the clothes read as thin shells.
+- Scripted bmesh offsets cannot stand in for a sculpt pass (guide §10). The head, jowls, back of skull and the hair would need a human sculpt pass, or a clean base mesh (guide §8), to reach the concept.
+- No hero Cycles still, side-by-side, or idle mp4 were rendered.

@@ -1,0 +1,40 @@
+{
+  "blender_version": "5.0.1",
+  "backend": "CPU",
+  "preview": true,
+  "stage": 2,
+  "resolution": [
+    480,
+    480
+  ],
+  "samples": 16,
+  "adaptive_threshold": 0.02,
+  "denoiser": "OpenImageDenoise",
+  "fps": 24,
+  "loop_period_frames": 48,
+  "vertices": 20320,
+  "faces": 20318,
+  "quad_faces": 20318,
+  "renders": [
+    {
+      "file": "front.png",
+      "frame": 1,
+      "seconds": 1.17
+    },
+    {
+      "file": "side.png",
+      "frame": 1,
+      "seconds": 1.038
+    },
+    {
+      "file": "top.png",
+      "frame": 1,
+      "seconds": 1.075
+    },
+    {
+      "file": "three_quarter.png",
+      "frame": 1,
+      "seconds": 1.111
+    }
+  ]
+}

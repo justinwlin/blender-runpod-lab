@@ -1,0 +1,5 @@
+# Stage 4 — quad retopology and corrected base proportions
+
+Viewed the four-view contact against the concept. Supervisor review correctly rejected the first narrow profile. Named mascot constants now specify a 0.8 torso depth/width target, head width 2.15, shoulder target 1.58, taller ear tips and a roughly 40% head-height share. The correction deepens the torso/legs, projects the skull toward a rounder rear profile and snaps the evaluated lowest skin vertex to the floor. A first depth correction produced a head ridge; the revised continuous head falloff removes the crown ledge rather than hiding it under hair.
+
+QuadriFlow produces an all-quad cage and the single continuous skin receives blended head/spine/limb weights. Gate: proceed to the requested fast dressed preview. The lower jowl and back-of-skull flow remain stylized and need a human sculpt pass for the exact concept. Automatic quad flow is not hand-authored facial deformation topology; extreme-pose production validation is not claimed. No color or fur was added before this retopology gate.

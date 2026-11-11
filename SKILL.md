@@ -68,3 +68,9 @@ Return the visible result, source scene, GPU model, Blender version, backend, re
 Use nvidia-smi for GPU memory. Do not assume the control API's gpu.memory field reports VRAM.
 Separate setup duration, render duration, billed duration, and estimated cost.
 State whether cleanup succeeded. If no render ran, report that fact and the actual blocker.
+
+## High-fidelity character pipeline
+
+Follow the staged, contact-sheet workflow in [Sophie's high-fidelity 3D model guide](https://github.com/sophie-zxy/high-fidelity-3d-model), adapted to the supplied species and pose. Use one mirrored Skin cage, subdivided cube or traced silhouette; fuse one continuous skin; sculpt primary, secondary and tertiary forms; retopologize to clean quads before adding the dressed/material look. Judge front, side, top and three-quarter silhouettes at every gate, write a short critique, and correct defects before proceeding. Never label a gray blockout finished.
+
+Keep mascot proportions in named parameters with assertions. Flatten and socket layered eyes behind overlapping lids, use tapered Bezier tails/whiskers, and keep paw grooves in the fused skin. `scripts/contact_sheet.py` renders reusable views from any saved Blender scene or named object's bounds; ordinary Python with Pillow assembles the images alongside a concept reference. Export GLB and validate it through a factory-startup fresh import. State where human sculpting, intentional facial loops and deformation testing are still needed. User-provided host, budget, preview-only and infrastructure restrictions override the generic remote-render workflow above.
