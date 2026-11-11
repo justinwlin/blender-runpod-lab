@@ -11,7 +11,7 @@ This is the **default way to run Blender on Runpod** for this repo. It is infras
 | `ghcr.io/justinwlin/blender-runpod:5.0.1` | Pinned release, prefer this |
 | `ghcr.io/justinwlin/blender-runpod:latest` | Same build, moving tag |
 
-**Digest (MCP path + X11 fixes baked in):** `sha256:295342ad1a991c83c9b2814e1d2de9851a8897849cfda64769c4189d465b9304`
+**Digest (MCP path + X11 fixes, green rebuild on `main`):** `sha256:db6099f823e50c95e20674f117ddbe4cdab0a54a613d4a88bf2810f66cda2b78`
 
 The package must stay **public** so Runpod can pull it without a registry credential. Anonymous pulls of `:5.0.1` and `:latest` have been verified against that digest.
 
