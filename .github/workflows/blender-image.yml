@@ -1,0 +1,80 @@
+name: Build Blender Runpod image
+
+on:
+  push:
+    branches: [main, cat-persona]
+    paths:
+      - "docker/blender/**"
+      - ".github/workflows/blender-image.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: justinwlin/blender-runpod
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+        id: build
+        uses: docker/build-push-action@v6
+        with:
+          context: docker/blender
+          file: docker/blender/Dockerfile
+          push: true
+          tags: |
+            ghcr.io/justinwlin/blender-runpod:5.0.1
+            ghcr.io/justinwlin/blender-runpod:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          provenance: false
+
+      - name: Make the GHCR package public
+        # Runpod can only pull this image without credentials if the package
+        # is public. If this step fails, stop and change visibility in the
+        # GitHub Packages settings; do not work around it with another registry.
+        run: |
+          set -euo pipefail
+          echo "Build digest: ${{ steps.build.outputs.digest }}"
+          # Retry briefly: the package record can lag the image push.
+          ok=0
+          for i in 1 2 3 4 5; do
+            if gh api --method PUT \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              /user/packages/container/blender-runpod/visibility \
+              -f visibility=public; then
+              echo "GHCR package blender-runpod is public."
+              ok=1
+              break
+            fi
+            echo "visibility update attempt $i failed; retrying in 15s"
+            sleep 15
+          done
+          if [ "$ok" != 1 ]; then
+            echo "::error::Could not make ghcr.io/justinwlin/blender-runpod public with GITHUB_TOKEN."
+            echo "Open https://github.com/users/justinwlin/packages/container/blender-runpod/settings"
+            echo "and set package visibility to Public so Runpod can pull the image without credentials."
+            exit 1
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

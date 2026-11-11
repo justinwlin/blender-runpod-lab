@@ -65,3 +65,8 @@ It fails if Blender cannot find an OptiX GPU. It does not silently render on the
 
 Never commit API keys, SSH private keys, or raw account responses.
 The `.local/` directory holds local connection files and is ignored by Git.
+
+## Blender 5.0.1 Runpod image
+
+A CUDA 12.4 + Blender 5.0.1 image and personal-account Runpod template are documented in [docs/docker-template.md](docs/docker-template.md). The image is `ghcr.io/justinwlin/blender-runpod:5.0.1` (public GHCR package), built by GitHub Actions from [docker/blender/](docker/blender/).
+
