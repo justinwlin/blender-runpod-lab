@@ -1,0 +1,399 @@
+{
+ "ckpt": {
+  "class_type": "CheckpointLoaderSimple",
+  "inputs": {
+   "ckpt_name": "sd_xl_base_1.0.safetensors"
+  }
+ },
+ "lora": {
+  "class_type": "LoraLoader",
+  "inputs": {
+   "model": [
+    "ckpt",
+    0
+   ],
+   "clip": [
+    "ckpt",
+    1
+   ],
+   "lora_name": "FluffyStyleXL.safetensors",
+   "strength_model": 1.0,
+   "strength_clip": 1.0
+  }
+ },
+ "pos": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "text": "FluffyStyle, a cute miniature toy kitten, soft rounded plush figurine with fluffy flocked fur, chubby rounded body, short stubby legs, big round head, large glossy green eyes, tiny pink nose, white whiskers, calico coat: white muzzle, chest and paws with black and orange patches, soft fuzzy silhouette, adorable collectible mini toy cat, macro product photo on a dark walnut desk, warm golden hour light, shallow depth of field, highly detailed soft fur",
+   "clip": [
+    "lora",
+    1
+   ]
+  }
+ },
+ "neg": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "text": "hard plastic, vinyl, glossy smooth surface, blocky, angular, low poly, 3d render, cartoon drawing, blurry, deformed, extra limbs, extra tail, text, watermark, low quality",
+   "clip": [
+    "lora",
+    1
+   ]
+  }
+ },
+ "src": {
+  "class_type": "VHS_LoadImagesPath",
+  "inputs": {
+   "directory": "/workspace/ai/s4/src",
+   "image_load_cap": 1,
+   "skip_first_images": 0,
+   "select_every_nth": 1
+  }
+ },
+ "src_s": {
+  "class_type": "ImageScale",
+  "inputs": {
+   "image": [
+    "src",
+    0
+   ],
+   "upscale_method": "lanczos",
+   "width": 1280,
+   "height": 720,
+   "crop": "disabled"
+  }
+ },
+ "dep": {
+  "class_type": "VHS_LoadImagesPath",
+  "inputs": {
+   "directory": "/workspace/ai/s4/depth",
+   "image_load_cap": 1,
+   "skip_first_images": 0,
+   "select_every_nth": 1
+  }
+ },
+ "dep_s": {
+  "class_type": "ImageScale",
+  "inputs": {
+   "image": [
+    "dep",
+    0
+   ],
+   "upscale_method": "bilinear",
+   "width": 1280,
+   "height": 720,
+   "crop": "disabled"
+  }
+ },
+ "line": {
+  "class_type": "Canny",
+  "inputs": {
+   "image": [
+    "src_s",
+    0
+   ],
+   "low_threshold": 0.08,
+   "high_threshold": 0.22
+  }
+ },
+ "cn": {
+  "class_type": "ControlNetLoader",
+  "inputs": {
+   "control_net_name": "diffusion_pytorch_model_promax.safetensors"
+  }
+ },
+ "tile_in": {
+  "class_type": "ImageBlur",
+  "inputs": {
+   "image": [
+    "src_s",
+    0
+   ],
+   "blur_radius": 1,
+   "sigma": 0.1
+  }
+ },
+ "cn_type_d": {
+  "class_type": "SetUnionControlNetType",
+  "inputs": {
+   "control_net": [
+    "cn",
+    0
+   ],
+   "type": "depth"
+  }
+ },
+ "cn_d": {
+  "class_type": "ControlNetApplyAdvanced",
+  "inputs": {
+   "positive": [
+    "pos",
+    0
+   ],
+   "negative": [
+    "neg",
+    0
+   ],
+   "control_net": [
+    "cn_type_d",
+    0
+   ],
+   "image": [
+    "dep_s",
+    0
+   ],
+   "strength": 0.6,
+   "start_percent": 0.0,
+   "end_percent": 0.6,
+   "vae": [
+    "ckpt",
+    2
+   ]
+  }
+ },
+ "cn_type_l": {
+  "class_type": "SetUnionControlNetType",
+  "inputs": {
+   "control_net": [
+    "cn",
+    0
+   ],
+   "type": "canny/lineart/anime_lineart/mlsd"
+  }
+ },
+ "cn_l": {
+  "class_type": "ControlNetApplyAdvanced",
+  "inputs": {
+   "positive": [
+    "cn_d",
+    0
+   ],
+   "negative": [
+    "cn_d",
+    1
+   ],
+   "control_net": [
+    "cn_type_l",
+    0
+   ],
+   "image": [
+    "line",
+    0
+   ],
+   "strength": 0.3,
+   "start_percent": 0.0,
+   "end_percent": 0.5,
+   "vae": [
+    "ckpt",
+    2
+   ]
+  }
+ },
+ "cn_type_t": {
+  "class_type": "SetUnionControlNetType",
+  "inputs": {
+   "control_net": [
+    "cn",
+    0
+   ],
+   "type": "tile"
+  }
+ },
+ "cn_t": {
+  "class_type": "ControlNetApplyAdvanced",
+  "inputs": {
+   "positive": [
+    "cn_l",
+    0
+   ],
+   "negative": [
+    "cn_l",
+    1
+   ],
+   "control_net": [
+    "cn_type_t",
+    0
+   ],
+   "image": [
+    "tile_in",
+    0
+   ],
+   "strength": 0.35,
+   "start_percent": 0.0,
+   "end_percent": 0.5,
+   "vae": [
+    "ckpt",
+    2
+   ]
+  }
+ },
+ "enc": {
+  "class_type": "VAEEncode",
+  "inputs": {
+   "pixels": [
+    "src_s",
+    0
+   ],
+   "vae": [
+    "ckpt",
+    2
+   ]
+  }
+ },
+ "mt": {
+  "class_type": "VHS_LoadImagesPath",
+  "inputs": {
+   "directory": "/workspace/ai/s4/matte",
+   "image_load_cap": 1,
+   "skip_first_images": 0,
+   "select_every_nth": 1
+  }
+ },
+ "mt_s": {
+  "class_type": "ImageScale",
+  "inputs": {
+   "image": [
+    "mt",
+    0
+   ],
+   "upscale_method": "bilinear",
+   "width": 1280,
+   "height": 720,
+   "crop": "disabled"
+  }
+ },
+ "mt_m": {
+  "class_type": "ImageToMask",
+  "inputs": {
+   "image": [
+    "mt_s",
+    0
+   ],
+   "channel": "red"
+  }
+ },
+ "mt_g": {
+  "class_type": "GrowMask",
+  "inputs": {
+   "mask": [
+    "mt_m",
+    0
+   ],
+   "expand": 18,
+   "tapered_corners": true
+  }
+ },
+ "mt_i": {
+  "class_type": "MaskToImage",
+  "inputs": {
+   "mask": [
+    "mt_g",
+    0
+   ]
+  }
+ },
+ "mt_b": {
+  "class_type": "ImageBlur",
+  "inputs": {
+   "image": [
+    "mt_i",
+    0
+   ],
+   "blur_radius": 12,
+   "sigma": 6.0
+  }
+ },
+ "mt_f": {
+  "class_type": "ImageToMask",
+  "inputs": {
+   "image": [
+    "mt_b",
+    0
+   ],
+   "channel": "red"
+  }
+ },
+ "enc_m": {
+  "class_type": "SetLatentNoiseMask",
+  "inputs": {
+   "samples": [
+    "enc",
+    0
+   ],
+   "mask": [
+    "mt_f",
+    0
+   ]
+  }
+ },
+ "ks": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "lora",
+    0
+   ],
+   "seed": 7,
+   "steps": 28,
+   "cfg": 5.5,
+   "sampler_name": "dpmpp_2m",
+   "scheduler": "karras",
+   "positive": [
+    "cn_t",
+    0
+   ],
+   "negative": [
+    "cn_t",
+    1
+   ],
+   "latent_image": [
+    "enc_m",
+    0
+   ],
+   "denoise": 1.0
+  }
+ },
+ "dec": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "ks",
+    0
+   ],
+   "vae": [
+    "ckpt",
+    2
+   ]
+  }
+ },
+ "comp": {
+  "class_type": "ImageCompositeMasked",
+  "inputs": {
+   "destination": [
+    "src_s",
+    0
+   ],
+   "source": [
+    "dec",
+    0
+   ],
+   "x": 0,
+   "y": 0,
+   "resize_source": false,
+   "mask": [
+    "mt_f",
+    0
+   ]
+  }
+ },
+ "save": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "comp",
+    0
+   ],
+   "filename_prefix": "y3_sdxl/f"
+  }
+ }
+}

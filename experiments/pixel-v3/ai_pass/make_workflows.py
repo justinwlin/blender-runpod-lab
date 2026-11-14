@@ -5,7 +5,7 @@ import json, sys
 P = dict(frames='/workspace/pc/v3/post/final_frames', depth='/workspace/ai/depth', ref='/workspace/ai/ref', key='/workspace/ai/key',
          start=160, length=81, width=1280, height=720, seed=7, prefix='wan', denoise_from=2, steps=4,
          canny_lo=0.08, canny_hi=0.22, depth_strength=1.0, line_strength=0.7, sd_denoise=0.42, sd_steps=28, sd_cfg=5.5, lora=0.8, tile_strength=0.0, tile_end=0.6,
-         depth_end=1.0, line_end=0.9, sd_prompt='v2', matte='', mask_grow=20, mask_blur=12)
+         depth_end=1.0, line_end=0.9, sd_prompt='v2', matte='', mask_grow=20, mask_blur=12, tile_blur=0, wan_prompt='real')
 for a in sys.argv[2:]:
     k, v = a.split('=', 1); P[k] = type(P[k])(v) if not isinstance(P[k], str) else v
 OUT = sys.argv[1]
@@ -16,6 +16,10 @@ NEG = ("色调艳丽，过曝，静态，细节模糊不清，字幕，风格，
        "画得不好的手部，画得不好的脸部，畸形的，毁容的，形态畸形的肢体，手指融合，静止不动的画面，杂乱的背景，三条腿，背景人很多，倒着走, "
        "plastic, rubber, vinyl toy, smooth 3d render, extra limbs, deformed, text, watermark")
 
+POS_TOY = ("A cute miniature plush toy kitten with soft fluffy flocked fur, rounded chubby body, short stubby legs and a big round head, calico coat with large black "
+           "patches and bright orange patches on a white base, white muzzle, chest and paws, walking with a springy bouncy gait on a dark walnut desk beside a glowing "
+           "mushroom lamp, warm golden-hour window light, macro shot, shallow depth of field, soft detailed fur, adorable collectible toy")
+if P.get('wan_prompt') == 'toy': POS = POS_TOY; NEG = NEG + ", green fur, olive tint, yellow tint, colour shift, stiff legs"
 def base(g):
     g['clip'] = {'class_type': 'CLIPLoader', 'inputs': {'clip_name': 'umt5_xxl_fp8_e4m3fn_scaled.safetensors', 'type': 'wan', 'device': 'default'}}
     g['pos'] = {'class_type': 'CLIPTextEncode', 'inputs': {'text': POS, 'clip': ['clip', 0]}}
@@ -102,24 +106,30 @@ SD_PROMPTS = {
  'v2': ("FluffyStyle, macro photograph of a real fluffy calico kitten, dense soft fur with visible individual hairs, fuzzy fur edges, long white whiskers, "
         "glossy green eyes, pink nose, white muzzle chest and paws, black and orange fur patches, on a dark walnut desk, warm golden hour light, "
         "shallow depth of field, photorealistic, 85mm, highly detailed fur"),
+ 'toy2': ("FluffyStyle, a cute miniature toy kitten, soft rounded plush figurine with fluffy flocked fur, chubby rounded body, short stubby legs, big round head, "
+          "calico coat with large solid black patches and bright orange patches on a white base, white muzzle, white chest and white paws, big shiny eyes, tiny pink nose, "
+          "white whiskers, soft fuzzy silhouette, adorable collectible mini toy cat, macro product photo on a dark walnut desk, warm golden hour light, shallow depth of field"),
  'toy': ("FluffyStyle, a cute miniature toy kitten, soft rounded plush figurine with fluffy flocked fur, chubby rounded body, short stubby legs, big round head, "
          "large glossy green eyes, tiny pink nose, white whiskers, calico coat: white muzzle, chest and paws with black and orange patches, soft fuzzy silhouette, "
          "adorable collectible mini toy cat, macro product photo on a dark walnut desk, warm golden hour light, shallow depth of field, highly detailed soft fur")}
+SD_NEG2 = "green fur, green tint, tabby stripes, brown fur, grey fur, hard plastic, vinyl, glossy smooth surface, blocky, angular, low poly, 3d render, cartoon drawing, blurry, deformed, extra limbs, extra tail, text, watermark, low quality"
 SD_NEG = "hard plastic, vinyl, glossy smooth surface, blocky, angular, low poly, 3d render, cartoon drawing, blurry, deformed, extra limbs, extra tail, text, watermark, low quality"
 g = {}
 g['ckpt'] = {'class_type': 'CheckpointLoaderSimple', 'inputs': {'ckpt_name': 'sd_xl_base_1.0.safetensors'}}
 g['lora'] = {'class_type': 'LoraLoader', 'inputs': {'model': ['ckpt', 0], 'clip': ['ckpt', 1], 'lora_name': 'FluffyStyleXL.safetensors', 'strength_model': P['lora'], 'strength_clip': P['lora']}}
 g['pos'] = {'class_type': 'CLIPTextEncode', 'inputs': {'text': SD_PROMPTS[P['sd_prompt']], 'clip': ['lora', 1]}}
-g['neg'] = {'class_type': 'CLIPTextEncode', 'inputs': {'text': SD_NEG if P['sd_prompt'] == 'toy' else "plastic, rubber, vinyl, smooth 3d render, cartoon, blurry, deformed, extra limbs, text, watermark, low quality", 'clip': ['lora', 1]}}
+g['neg'] = {'class_type': 'CLIPTextEncode', 'inputs': {'text': SD_NEG2 if P['sd_prompt'] == 'toy2' else SD_NEG if P['sd_prompt'] == 'toy' else "plastic, rubber, vinyl, smooth 3d render, cartoon, blurry, deformed, extra limbs, text, watermark, low quality", 'clip': ['lora', 1]}}
 def load(name, directory, method):
     g[name] = {'class_type': 'VHS_LoadImagesPath', 'inputs': {'directory': directory, 'image_load_cap': P['length'], 'skip_first_images': P['start'], 'select_every_nth': 1}}
     g[name + '_s'] = {'class_type': 'ImageScale', 'inputs': {'image': [name, 0], 'upscale_method': method, 'width': P['width'], 'height': P['height'], 'crop': 'disabled'}}
 load('src', P['frames'], 'lanczos'); load('dep', P['depth'], 'bilinear')
 g['line'] = {'class_type': 'Canny', 'inputs': {'image': ['src_s', 0], 'low_threshold': P['canny_lo'], 'high_threshold': P['canny_hi']}}
 g['cn'] = {'class_type': 'ControlNetLoader', 'inputs': {'control_net_name': 'diffusion_pytorch_model_promax.safetensors'}}
+# the tile control gets a blurred copy of the render: it then locks the colour layout (patches) without locking the smooth shading
+g['tile_in'] = {'class_type': 'ImageBlur', 'inputs': {'image': ['src_s', 0], 'blur_radius': max(1, P['tile_blur']), 'sigma': max(0.1, P['tile_blur'] / 2.0)}}
 last = ('pos', 'neg', 0, 0)
 for tag, typ, img, strength, end in (('d', 'depth', 'dep_s', P['depth_strength'], P['depth_end']), ('l', 'canny/lineart/anime_lineart/mlsd', 'line', P['line_strength'], P['line_end']),
-                                     ('t', 'tile', 'src_s', P['tile_strength'], P['tile_end'])):
+                                     ('t', 'tile', 'tile_in', P['tile_strength'], P['tile_end'])):
     if strength <= 0: continue
     g['cn_type_' + tag] = {'class_type': 'SetUnionControlNetType', 'inputs': {'control_net': ['cn', 0], 'type': typ}}
     g['cn_' + tag] = {'class_type': 'ControlNetApplyAdvanced', 'inputs': {'positive': [last[0], last[2]], 'negative': [last[1], last[3]], 'control_net': ['cn_type_' + tag, 0],

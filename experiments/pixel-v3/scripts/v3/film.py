@@ -259,15 +259,20 @@ for l, ph in PHASE.items():
         final = td + CYCLE > T_WALK1 + 4
         nxt = fr[l] + Vector((0, Y1 if final else body_y(td) - a_off, 0))
         R.kfoot(round(lift), l, last)                                              # planted until lift-off
-        R.kfoot(round(lift + (td - lift) * 0.5), l, (last + nxt) / 2 + Vector((0, -0.03, 0.15)))   # passing: paw up and slightly ahead
+        sw = td - lift                                                             # springy swing: toe-off, high passing pose, soft reach, then place
+        R.kfoot(round(lift + sw * 0.22), l, last + Vector((0, 0.02, 0.11)))
+        R.kfoot(round(lift + sw * 0.55), l, (last + nxt) / 2 + Vector((0, -0.05, 0.25)))
+        R.kfoot(round(lift + sw * 0.85), l, nxt + Vector((0, -0.05, 0.07)))
         R.kfoot(round(td), l, nxt); last = nxt
         if l[0] == 'F': td_front.append((round(td), l))
         k += 1
     R.kfoot(T_WALK1 + 8, l, last)
 for f in range(T_WALK0, T_WALK1 + 1, 2):                                           # body travel (y) on twos, with bob / roll / yaw layered on
     ph = (f - T_WALK0) / CYCLE * 2 * math.pi; amp = min(1, (f - T_WALK0) / 8, (T_WALK1 - f) / 8)
-    R.kloc(f, 'body', (0.02 * amp * sin(ph + 0.6), body_y(f), amp * (-0.012 + 0.028 * cos(2 * ph + 0.4))))
-    R.krot(f, 'body', rx=2.0 * amp + 1.5 * amp * sin(2 * ph), ry=3.5 * amp * sin(ph + 0.3), rz=4 * amp * sin(ph + 1.2))
+    # lower stance (knees stay bent) and a clear two-beat bounce
+    R.kloc(f, 'body', (0.025 * amp * sin(ph + 0.6), body_y(f), amp * (-0.055 + 0.05 * cos(2 * ph + 0.4))))
+    R.krot(f, 'body', rx=2.0 * amp + 2.5 * amp * sin(2 * ph), ry=4.5 * amp * sin(ph + 0.3), rz=5 * amp * sin(ph + 1.2))
+    R.kscale(f, 'body', 1 + 0.02 * amp * cos(2 * ph + 0.4), 1.0, 1 - 0.03 * amp * cos(2 * ph + 0.4))
     R.krot(f, 'chest', rz=-6 * amp * sin(ph + 1.2), ry=-3 * amp * sin(ph + 0.3))
 for f in range(T_WALK0, T_WALK1 + 1, 5):                                           # head: delayed counter-motion, eyes on the ball
     ph = (f - 3 - T_WALK0) / CYCLE * 2 * math.pi; amp = min(1, (f - T_WALK0) / 8, (T_WALK1 - f) / 8)
@@ -275,6 +280,7 @@ for f in range(T_WALK0, T_WALK1 + 1, 5):                                        
     for e, s in (('L', 1), ('R', -1)): R.krot(f + 2, 'ear.' + e, rx=-5 + 5 * amp * cos(2 * ph - 0.8), ry=2 * s * amp)
     tail(f, lean=6, sway=9 * amp * sin(ph + 2.0), curl=5 * amp * sin(ph + 1.0), lag=1)
 E = T_WALK1
+R.kscale(E + 6, 'body')
 R.kloc(E + 4, 'body', (0, Y1 - 0.05, -0.03)); R.krot(E + 4, 'body', rx=5); R.kloc(E + 9, 'body', (0, Y1 + 0.015, 0.01)); R.krot(E + 9, 'body', rx=-1.5)   # stop: overshoot forward, rock back, settle
 R.kloc(E + 14, 'body', (0, Y1, 0)); R.krot(E + 14, 'body'); R.krot(E + 6, 'chest'); R.krot(E + 6, 'head', rx=14, rz=-4); R.krot(E + 12, 'head', rx=10, rz=-6, ry=6)
 tail(E + 6, lean=14, lag=1); tail(E + 14, lean=2, lag=1)

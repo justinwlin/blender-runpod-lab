@@ -2,7 +2,7 @@
 
 Goal: make the rendered Pixel read as a soft, fluffy mini toy kitten instead of smooth vinyl, using the Blender render only for motion, pose, camera and the calico patches, and keeping the set and props exactly as rendered.
 
-**Status: work in progress.** A 4-second test shot is being tuned; the full 26 s has not been run. Nothing here is a finished result yet.
+**Status: stopped on request, unfinished.** One 4-second test shot was taken through the pipeline; the full 26 s was not run. See [RESULTS.md](RESULTS.md) for what worked and what did not.
 
 - [MODELS.md](MODELS.md): every model, LoRA and node with links, revisions, sizes, target folders and licences
 - [setup_comfy.sh](setup_comfy.sh): installs ComfyUI, the two custom nodes and the models on a pod (`wan`, `sdxl` or `all`)
@@ -10,6 +10,9 @@ Goal: make the rendered Pixel read as a soft, fluffy mini toy kitten instead of 
 - [run_workflow.py](run_workflow.py), [run_frames.py](run_frames.py): queue a workflow on the local ComfyUI server and wait; the second runs one prompt per frame
 - [depth_pass.py](depth_pass.py), [matte_pass.py](matte_pass.py): Blender scripts that render an exact depth pass and a cat matte from the film scene
 - [composite.py](composite.py): puts the AI cat back over the untouched render through the matte
+- [colorlock.py](colorlock.py): same, and locks the cat's colours and patch layout to the render
+- [finish_shot.sh](finish_shot.sh): colour-lock a shot and encode the clip, the render clip and a side-by-side
+- [node_info.py](node_info.py): print node schemas from a saved `/object_info` dump (`api_to_ui.py` needs that dump: `curl http://127.0.0.1:8188/object_info > object_info.json`)
 - [api_to_ui.py](api_to_ui.py): converts an API workflow to UI-format JSON
 - [workflows/](workflows/): one folder per test with the workflow that was run
 
@@ -35,12 +38,18 @@ The settings that first showed fur (`t4_key`) are in [workflows/t4_key/](workflo
 
 `composite.py` over the `t4_key` frames (matte grown 7 px, feathered 5 px) keeps the ball, books, wall and light exactly as rendered.
 
-## What is still open
+## Toy-look tests and the final test
 
-- Review asked for a cute, soft, rounded mini toy kitten rather than a furry version of the Blender shape: looser depth/line control, masked cat-only repaint, toy prompt (`sd_prompt=toy`, `matte=`). In progress.
-- Legs read as stiff in the video; looser control on the legs and/or a springier Blender walk are to be tested.
-- Patch fidelity against the render at high denoise.
-- Per-frame SDXL versus Wan for flicker; the full 26 s; upscaling the 720p AI cat for the 1080p film.
+Key-frame rounds ran on film frames 160 and 200 (`toy_y*`) or 200 and 490 (`toy_z*`, `toy_w*`).
+
+| Test | Workflow | Key settings | Time on an RTX 4090 | Result |
+| --- | --- | --- | --- | --- |
+| `toy_y1`-`toy_y4` | `sdxl_frame_refine` | cat-only repaint through the matte, toy prompt, denoise 0.95-1.0, loose depth 0.3-0.6, tile 0.35-0.6 | 9-21 s per frame | Plush and soft, scene locked, but patches lost (orange / olive, one green) |
+| `toy_z1`-`toy_z4` | `sdxl_frame_refine` | as above with tile 0.7-1.0 on a blurred copy of the render, ending at 80-100% | about 11 s per frame | Patches exact, but smooth vinyl again: no fur |
+| `toy_w1`-`toy_w5` | `sdxl_frame_refine` | tile strong but ending early (30-55%), and `w5`: denoise 0.85, tile 0.5 to 60%, depth 0.4 to 50%, LoRA 1.2 | about 9 s per frame | `w5` is the best balance (fur, patches roughly in place) but the orange goes pink |
+| `t5_key` | `sdxl_frame_refine` (`w5` settings) + `colorlock.py` + `wan_vace_keyframe` (toy prompt) + `colorlock.py` | see [RESULTS.md](RESULTS.md) | 301 s for the video | Best result: plush kitten, stable calico colours, props untouched. Fur softer than the key frame, patches slightly mottled, faint halo |
+
+The toy-round SDXL workflows were regenerated after a later change to the generator: the tile control now always goes through an `ImageBlur` node, which for `tile_blur=0` is radius 1 / sigma 0.1 (effectively a no-op). When `y1`-`y4` ran, the tile control took the render directly.
 
 ## Costs
 
