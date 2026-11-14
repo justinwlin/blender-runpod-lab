@@ -142,3 +142,118 @@ Billed-duration estimates, not invoices.
 Total for this work: under $1 of roughly $10 budgeted. The A5000 was picked as the cheapest available card; it was plenty for these previews.
 
 The first pod was terminated as soon as the meshes were copied off it, a few minutes before an instruction to keep it running arrived. Its Hunyuan3D-2 install and model cache went with it, so generating new meshes means repeating that setup (clone, `pip install -e .`, pin diffusers/transformers, model download).
+
+---
+
+# v3: rig-ready rebuild and the "golden hour" short
+
+v1/v2 above animate the fused, seated Hunyuan mesh. That mesh has no joint topology, the legs are fused to the belly, and automatic weights smear it. v3 rebuilds the character so it can be animated properly, puts it on a lived-in set, and renders a 26 s 1080p short. Scripts are in `scripts/pixel_calico/v3/` (`scripts/v3/` in the working directory).
+
+## v3 pipeline
+
+| Step | Script | Notes |
+| --- | --- | --- |
+| Crisp head textures + toe-bean decal | `make_textures.py` | from the v1 label maps; speckle removed |
+| Model, UVs, bake, eyelids, skeleton | `build_v3.py`, `quadparts.py` | reads the v2 body as shape and colour source |
+| Posing / keyframe helpers | `pixrig.py` | armature-axis rotations, IK foot targets, per-channel keys |
+| Model + rig gate | `gate_model.py`, `sheet_grid.py` | turnaround in 3 poses + wireframe |
+| Set, lights, cameras, performance | `film.py` | one clock: shots and beats are constants at the top |
+| Frame renders (gates and farm) | `render.py`, `run_gates.sh`, `run_cut.sh` | every-Nth split, resumable |
+| Pods and farm | `pod.sh`, `farm.sh` | create / wait / list; push, start, status, pull |
+| Finish | `make_title.py`, `post.sh` | ffmpeg bloom, grade, grain, title, fades |
+
+## Model
+
+- **All-quad parts in a standing pose**: head, two ears, neck, body, four legs, tail (17,264 quads, no triangles), each generated from the same "subdivided cube" topology (`quadparts.py`): mapped to a sphere for the head and body, to a quad-capped tube for legs, tail, ears and neck. Every part gets a Subdivision modifier.
+- **Head = the Hunyuan head, re-topologised.** A 40x40x6 quad sphere is shrink-wrapped by radial ray casts from the head centre onto the v2 surface. Rays that would land on the chest or the ear shells are discarded and filled by a harmonic relaxation, so the skull closes smoothly under the ears and chin. Ears are rebuilt as their own tapered shells with a concave inner face.
+- **Body, neck, legs, tail are modelled, not scanned.** The seated sculpt cannot be shrink-wrapped into a standing pose, so these follow the sculpt's proportions only. Legs have a paw with three toe lobes, a slim ankle, a slight elbow/hock bend and edge loops through the knee.
+- **Leg-to-body junction.** The first versions left the leg tops as visible lumps, then as white "cups" with a hard rim. The fix: an implicit function of the torso (`body_level`) and a clamp that pulls every leg vertex above the belly line just inside the torso skin, so the leg emerges from the body at a shallow angle. The coat rule gives legs white socks with a wobbly top and lets thighs and shoulders carry the body's calico, so leg and torso read as one coat.
+- **Review notes that changed the shape** (in order): legs were plain cylinders; the torso read as a broken waist (a raised chest and tucked rear left a dip in the back); the hips bulged where body met hind legs; the hard white leg/body seam. Each has a comment at the fix in `build_v3.py`.
+
+## UVs and baked texture
+
+- Each part's six cube faces are UV islands packed into two 4096 atlases (A: head, body, neck; B: legs, tail, ears).
+- One bake material computes the colour; Cycles bakes it (EMIT) per part:
+  - **head**: the four art views are projected per pixel from 4x-upsampled, anti-aliased label textures, chosen by per-vertex view weights (same best-facing / unoccluded rule as v1). This removes the v1/v2 stair-stepped eye edges.
+  - **body, neck, legs, tail, ears**: large clean-edged calico blobs from one low-frequency 3D noise in rest space (so patches flow across parts), white belly/chest/socks, salmon inner ears, pink toe beans on the soles from a decal.
+- The art's "tiny orange speckles" were removed on request: fur islands under 2,600 px in the 1024 label maps are dropped and edges median-filtered, with the eyes/nose/mouth box protected.
+- An eye-gloss mask is baked the same way (crisp circles) and drives roughness / clear coat.
+- Look-dev: Principled with the atlas as base colour, roughness 0.55, sheen 0.25, light subsurface; eyes glossy with a clear coat.
+
+## Eyelids
+
+Each lid is a thin patch that follows the head surface over the eye, with a `Blink` shape key from a thin lash line (open) to fully covering the eye (closed). Lid vertices take the fur colour sampled just outside the eye disc in the front art, with a dark lower edge. An earlier all-black lid read as goggles when closed.
+
+## Rig
+
+- Skeleton: root, body, chest, head, two ears, eight tail bones, and thigh + shin per leg with **Blender IK constraints** (chain length 2) to four foot-target bones; a `focus` helper bone on the face for camera focus.
+- Weights are analytic per part: rigid head; ears ramp from head to ear bone; neck blends chest to head; body blends body to chest; legs blend shin/thigh at the knee and hand the buried top over to the torso; tail tent weights.
+- Squash and stretch are bone scales on `body` and `chest` (the head does not inherit scale).
+
+## Animation
+
+Keys are authored per control at pose-to-pose beats and interpolated with Bezier curves (`pixrig.py`: `krot`, `kloc`, `kscale`, `kfoot`, `kblink`); they are written by a script, not placed by hand in a GUI. Secondary motion is keyed with per-bone frame offsets (tail lag, ear follow-through). Only the ball is simulated (analytic arcs, baked per frame), and the head-tracking keys during play are computed from the ball position.
+
+Story (624 frames, 24 fps): asleep in a loaf by the lamp; drowsy ear twitches; wakes, stands and stretches; notices the ball and walks to it (4-beat walk, IK feet planted, 20-frame cycle); taps it with a paw; crouch, butt wiggle, pounce; bats it between both paws; watches it roll away and looks up into the window light; lies back down and closes her eyes under the title.
+
+## Set, light, camera
+
+- Room at real scale (metres); the cat is 0.11 scale, about 23 cm tall. Walnut desk, mushroom lamp, mug, plant, books, notebook and pencil, shelf, framed portrait (the v2 hero render), window with frame and mullions. Everything bevelled; procedural wood with roughness variation.
+- Sun through the window (1.6 degree disc) keyed from 27 to 13 degrees elevation and from gold to orange; a low-density volume for shafts; emissive lamp dome plus a point light that brightens toward the end; a cool area fill; gradient sky.
+- Eight cameras bound to timeline markers: 35 / 85 / 50 / 40 / 100 / 35 / 50 / 35 mm, f/4 to f/8, eased dolly moves, focus on the face (or the ball for the paw insert).
+- Cycles OptiX, AgX (Medium High Contrast), 1920x1080, 192 samples with adaptive threshold 0.02, OpenImageDenoise, motion blur 0.5, persistent data.
+
+## Finish
+
+`post.sh` (ffmpeg): highlights blurred and screened back as bloom, a mild warm grade, vignette, film grain, a "Pixel / golden hour" title fading in over the last shot, fade in and out. No audio: no ElevenLabs key was configured.
+
+## v3 commands
+
+```sh
+python scripts/v3/make_textures.py out/labels/ out/v3/tex/
+blender -b v2/pixel-calico.blend -P scripts/v3/build_v3.py -- out/labels "$PWD/out/v3/tex" "$PWD/v3" gpu
+blender -b v3/pixel-v3.blend -P scripts/v3/gate_model.py -- "$PWD/v3/gates"
+blender -b v3/pixel-v3.blend -P scripts/v3/film.py -- "$PWD/out/v3/tex" "$PWD/v3/film.blend"
+blender -b v3/film.blend -P scripts/v3/render.py -- "$PWD/v3/gates/shots" 30,75,104,140,200,270,326,372,404,490,560,610 samples=64 scale=50
+blender -b v3/film.blend -P scripts/v3/render.py -- "$PWD/v3/frames" 0:624:5:1+2 samples=192 scale=100   # one pod's share
+sh scripts/v3/post.sh v3/frames out/v3/tex/title.png pixel_golden_hour.mp4
+```
+
+## v3 timings and cost
+
+| Step | Hardware | Time |
+| --- | --- | --- |
+| Model build incl. two 4096 atlas bakes | RTX A5000 pod | about 3 min |
+| Model gate, 16 turnaround tiles (720 px, 64 samples) | RTX A5000 | about 1 min |
+| Film scene build (set, cameras, all keys) | pod CPU | under 1 min |
+| Gate stills, 960x540, 64 samples | RTX A5000 | 7-10 s per frame |
+| Final frame, 1920x1080, 192 samples / 0.02 adaptive, volume, DOF, motion blur | RTX A5000 | about 37-40 s |
+| Same | RTX 4090 | 21-23 s on three pods, 29 s on a fourth |
+| All 624 frames | 3 pods for 20 min, then 5 pods | about 65 min wall (02:15 to 03:20 UTC) |
+| Shot-2 re-render (30 frames, eyelid fix) | two RTX 4090 pods | about 8 min |
+
+The farm split was every-Nth by residue at first (A5000: 1 in 5; two 4090s: 2 in 5 each). When two more pods were allowed mid-render, the remaining frames were dealt out again as explicit lists (`farm.sh split`), weighted two turns per round for the 4090s and one for the A5000. One 4090 ran about 30% slower than the others, so the tail of its list was handed to a pod that had finished.
+
+Pods (personal account, secure cloud, all left running on request):
+
+| Pod | GPU | $/hr | Created (UTC, 13-14 Nov 2026) | Used for |
+| --- | --- | --- | --- | --- |
+| pixel-calico-anim | RTX A5000 | 0.27 | 13 Nov 22:12 | v2 work, all v3 builds and gates, 1/9 of the final frames |
+| pixel-calico-r2 | RTX 4090 | 0.89 | 14 Nov 01:29 | whole-cut check, final frames |
+| pixel-calico-r3 | RTX 4090 | 0.89 | 14 Nov 01:29 | final frames, shot-2 re-render, finishing pass |
+| pixel-calico-r4 | RTX 4090 | 0.89 | 14 Nov 02:30 | final frames, shot-2 re-render |
+| pixel-calico-r5 | RTX 4090 | 0.89 | 14 Nov 02:30 | final frames |
+
+Billed-duration estimates up to the end of the render (03:25 UTC): A5000 5.2 h = $1.41; two 4090s at 1.9 h = $1.72 each; two 4090s at 0.9 h = $0.82 each; about **$6.50** for v3 in total, of which the final render itself (02:15 to 03:20) was about $3.60. All five pods keep billing about $3.83/hr together until they are stopped.
+
+## v3: what failed or needed another pass
+
+- **Pod SSH drops.** Long foreground SSH commands timed out several times and one pod was intermittently unreachable. Everything long now runs under `nohup` on the pod with a marker line in a log, and the box polls with short commands.
+- **A restart command that killed itself.** `pkill -f render.py` inside the same SSH command also matched that command's own shell. The kill is now a separate call with a pattern that cannot match itself.
+- **One frame was truncated** by being copied while Blender was still writing it; `farm.sh pull` now skips files modified in the last 12 seconds, and every frame is opened and checked before the encode.
+- **Depth of field.** f/2 at 100 mm on a 23 cm subject gives a few millimetres of focus; close-ups are f/5.6 to f/8 and focus follows a helper bone on the face.
+- **Head tracking** needed pitch and yaw limits; unclamped, the head turned like an owl's while following the ball.
+- **Stretch pose.** Tipping the head back 26 degrees during the stand-up stretch showed only the white chin to the camera and looked like the markings had vanished.
+- **Shot 2** went through three framings (top of the head, back of the head, then a face-level three-quarter view) and two eyelid designs before it read.
+- **Review-driven model changes** are listed under "Model" above.
+
