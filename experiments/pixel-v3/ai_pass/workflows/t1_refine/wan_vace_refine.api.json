@@ -1,0 +1,236 @@
+{
+ "clip": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+   "type": "wan",
+   "device": "default"
+  }
+ },
+ "pos": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "text": "A small fluffy calico kitten with soft, fine, realistic fur and delicate white whiskers, large glossy green eyes, pink nose, white muzzle, chest and paws, clean black and orange patches, on a dark walnut desk beside a glowing mushroom lamp, warm golden-hour window light, natural soft shine on the fur, shallow depth of field, cinematic, photorealistic, highly detailed",
+   "clip": [
+    "clip",
+    0
+   ]
+  }
+ },
+ "neg": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "text": "色调艳丽，过曝，静态，细节模糊不清，字幕，风格，作品，画作，画面，静止，整体发灰，最差质量，低质量，JPEG压缩残留，丑陋的，残缺的，多余的手指，画得不好的手部，画得不好的脸部，畸形的，毁容的，形态畸形的肢体，手指融合，静止不动的画面，杂乱的背景，三条腿，背景人很多，倒着走, plastic, rubber, vinyl toy, smooth 3d render, extra limbs, deformed, text, watermark",
+   "clip": [
+    "clip",
+    0
+   ]
+  }
+ },
+ "vae": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "wan_2.1_vae.safetensors"
+  }
+ },
+ "src": {
+  "class_type": "VHS_LoadImagesPath",
+  "inputs": {
+   "directory": "/workspace/pc/v3/post/final_frames",
+   "image_load_cap": 81,
+   "skip_first_images": 160,
+   "select_every_nth": 1
+  }
+ },
+ "src_s": {
+  "class_type": "ImageScale",
+  "inputs": {
+   "image": [
+    "src",
+    0
+   ],
+   "upscale_method": "lanczos",
+   "width": 1280,
+   "height": 720,
+   "crop": "disabled"
+  }
+ },
+ "line": {
+  "class_type": "Canny",
+  "inputs": {
+   "image": [
+    "src_s",
+    0
+   ],
+   "low_threshold": 0.08,
+   "high_threshold": 0.22
+  }
+ },
+ "dep": {
+  "class_type": "VHS_LoadImagesPath",
+  "inputs": {
+   "directory": "/workspace/ai/depth",
+   "image_load_cap": 81,
+   "skip_first_images": 160,
+   "select_every_nth": 1
+  }
+ },
+ "dep_s": {
+  "class_type": "ImageScale",
+  "inputs": {
+   "image": [
+    "dep",
+    0
+   ],
+   "upscale_method": "bilinear",
+   "width": 1280,
+   "height": 720,
+   "crop": "disabled"
+  }
+ },
+ "unet_low": {
+  "class_type": "UnetLoaderGGUF",
+  "inputs": {
+   "unet_name": "Wan2.2-VACE-Fun-A14B-low-noise-Q5_K_M.gguf"
+  }
+ },
+ "lora_low": {
+  "class_type": "LoraLoaderModelOnly",
+  "inputs": {
+   "model": [
+    "unet_low",
+    0
+   ],
+   "lora_name": "wan2.2_t2v_lightx2v_4steps_lora_v1.1_low_noise.safetensors",
+   "strength_model": 1.0
+  }
+ },
+ "ms_low": {
+  "class_type": "ModelSamplingSD3",
+  "inputs": {
+   "model": [
+    "lora_low",
+    0
+   ],
+   "shift": 5.0
+  }
+ },
+ "vace_d": {
+  "class_type": "WanVaceToVideo",
+  "inputs": {
+   "positive": [
+    "pos",
+    0
+   ],
+   "negative": [
+    "neg",
+    0
+   ],
+   "vae": [
+    "vae",
+    0
+   ],
+   "width": 1280,
+   "height": 720,
+   "length": 81,
+   "batch_size": 1,
+   "strength": 1.0,
+   "control_video": [
+    "dep_s",
+    0
+   ]
+  }
+ },
+ "vace_l": {
+  "class_type": "WanVaceToVideo",
+  "inputs": {
+   "positive": [
+    "vace_d",
+    0
+   ],
+   "negative": [
+    "vace_d",
+    1
+   ],
+   "vae": [
+    "vae",
+    0
+   ],
+   "width": 1280,
+   "height": 720,
+   "length": 81,
+   "batch_size": 1,
+   "strength": 0.7,
+   "control_video": [
+    "line",
+    0
+   ]
+  }
+ },
+ "enc": {
+  "class_type": "VAEEncode",
+  "inputs": {
+   "pixels": [
+    "src_s",
+    0
+   ],
+   "vae": [
+    "vae",
+    0
+   ]
+  }
+ },
+ "s_low": {
+  "class_type": "KSamplerAdvanced",
+  "inputs": {
+   "model": [
+    "ms_low",
+    0
+   ],
+   "add_noise": "enable",
+   "noise_seed": 7,
+   "steps": 4,
+   "cfg": 1.0,
+   "sampler_name": "euler",
+   "scheduler": "simple",
+   "positive": [
+    "vace_l",
+    0
+   ],
+   "negative": [
+    "vace_l",
+    1
+   ],
+   "latent_image": [
+    "enc",
+    0
+   ],
+   "start_at_step": 2,
+   "end_at_step": 4,
+   "return_with_leftover_noise": "disable"
+  }
+ },
+ "dec": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "s_low",
+    0
+   ],
+   "vae": [
+    "vae",
+    0
+   ]
+  }
+ },
+ "save": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "dec",
+    0
+   ],
+   "filename_prefix": "t1_refine/f"
+  }
+ }
+}

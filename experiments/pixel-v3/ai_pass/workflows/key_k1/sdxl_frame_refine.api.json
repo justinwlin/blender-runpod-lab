@@ -1,0 +1,244 @@
+{
+ "ckpt": {
+  "class_type": "CheckpointLoaderSimple",
+  "inputs": {
+   "ckpt_name": "sd_xl_base_1.0.safetensors"
+  }
+ },
+ "lora": {
+  "class_type": "LoraLoader",
+  "inputs": {
+   "model": [
+    "ckpt",
+    0
+   ],
+   "clip": [
+    "ckpt",
+    1
+   ],
+   "lora_name": "FluffyStyleXL.safetensors",
+   "strength_model": 1.0,
+   "strength_clip": 1.0
+  }
+ },
+ "pos": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "text": "FluffyStyle, macro photograph of a real fluffy calico kitten, dense soft fur with visible individual hairs, fuzzy fur edges, long white whiskers, glossy green eyes, pink nose, white muzzle chest and paws, black and orange fur patches, on a dark walnut desk, warm golden hour light, shallow depth of field, photorealistic, 85mm, highly detailed fur",
+   "clip": [
+    "lora",
+    1
+   ]
+  }
+ },
+ "neg": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "text": "plastic, rubber, vinyl, smooth 3d render, cartoon, blurry, deformed, extra limbs, text, watermark, low quality",
+   "clip": [
+    "lora",
+    1
+   ]
+  }
+ },
+ "src": {
+  "class_type": "VHS_LoadImagesPath",
+  "inputs": {
+   "directory": "/workspace/ai/key/src",
+   "image_load_cap": 1,
+   "skip_first_images": 0,
+   "select_every_nth": 1
+  }
+ },
+ "src_s": {
+  "class_type": "ImageScale",
+  "inputs": {
+   "image": [
+    "src",
+    0
+   ],
+   "upscale_method": "lanczos",
+   "width": 1280,
+   "height": 720,
+   "crop": "disabled"
+  }
+ },
+ "dep": {
+  "class_type": "VHS_LoadImagesPath",
+  "inputs": {
+   "directory": "/workspace/ai/key/depth",
+   "image_load_cap": 1,
+   "skip_first_images": 0,
+   "select_every_nth": 1
+  }
+ },
+ "dep_s": {
+  "class_type": "ImageScale",
+  "inputs": {
+   "image": [
+    "dep",
+    0
+   ],
+   "upscale_method": "bilinear",
+   "width": 1280,
+   "height": 720,
+   "crop": "disabled"
+  }
+ },
+ "line": {
+  "class_type": "Canny",
+  "inputs": {
+   "image": [
+    "src_s",
+    0
+   ],
+   "low_threshold": 0.08,
+   "high_threshold": 0.22
+  }
+ },
+ "cn": {
+  "class_type": "ControlNetLoader",
+  "inputs": {
+   "control_net_name": "diffusion_pytorch_model_promax.safetensors"
+  }
+ },
+ "cn_type_d": {
+  "class_type": "SetUnionControlNetType",
+  "inputs": {
+   "control_net": [
+    "cn",
+    0
+   ],
+   "type": "depth"
+  }
+ },
+ "cn_d": {
+  "class_type": "ControlNetApplyAdvanced",
+  "inputs": {
+   "positive": [
+    "pos",
+    0
+   ],
+   "negative": [
+    "neg",
+    0
+   ],
+   "control_net": [
+    "cn_type_d",
+    0
+   ],
+   "image": [
+    "dep_s",
+    0
+   ],
+   "strength": 0.7,
+   "start_percent": 0.0,
+   "end_percent": 1.0,
+   "vae": [
+    "ckpt",
+    2
+   ]
+  }
+ },
+ "cn_type_l": {
+  "class_type": "SetUnionControlNetType",
+  "inputs": {
+   "control_net": [
+    "cn",
+    0
+   ],
+   "type": "canny/lineart/anime_lineart/mlsd"
+  }
+ },
+ "cn_l": {
+  "class_type": "ControlNetApplyAdvanced",
+  "inputs": {
+   "positive": [
+    "cn_d",
+    0
+   ],
+   "negative": [
+    "cn_d",
+    1
+   ],
+   "control_net": [
+    "cn_type_l",
+    0
+   ],
+   "image": [
+    "line",
+    0
+   ],
+   "strength": 0.4,
+   "start_percent": 0.0,
+   "end_percent": 0.9,
+   "vae": [
+    "ckpt",
+    2
+   ]
+  }
+ },
+ "enc": {
+  "class_type": "VAEEncode",
+  "inputs": {
+   "pixels": [
+    "src_s",
+    0
+   ],
+   "vae": [
+    "ckpt",
+    2
+   ]
+  }
+ },
+ "ks": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "lora",
+    0
+   ],
+   "seed": 7,
+   "steps": 28,
+   "cfg": 5.5,
+   "sampler_name": "dpmpp_2m",
+   "scheduler": "karras",
+   "positive": [
+    "cn_l",
+    0
+   ],
+   "negative": [
+    "cn_l",
+    1
+   ],
+   "latent_image": [
+    "enc",
+    0
+   ],
+   "denoise": 0.8
+  }
+ },
+ "dec": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "ks",
+    0
+   ],
+   "vae": [
+    "ckpt",
+    2
+   ]
+  }
+ },
+ "save": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "dec",
+    0
+   ],
+   "filename_prefix": "k1_sdxl/f"
+  }
+ }
+}
